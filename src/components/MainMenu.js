@@ -24,6 +24,7 @@ export default function MainMenu() {
             <Form.Control
               type="search"
               className="me-2"
+              placeholder="offshore wind"
               aria-label="Search"
             />
             <Button variant="light">Search</Button>
