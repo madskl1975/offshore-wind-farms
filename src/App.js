@@ -1,12 +1,16 @@
+import { Navigate, Route, Routes } from "react-router-dom";
+import MainMenu from "./components/MainMenu";
+import AboutPage from "./pages/AboutPage";
 
-function App() {
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Offshore Wind Farms</p>
-      </header>
-    </div>
+    <>
+      <MainMenu />
+      <Routes>
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </>
   );
 }
-
-export default App;
