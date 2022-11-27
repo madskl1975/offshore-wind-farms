@@ -21,7 +21,7 @@ export default function CreateSite() {
     };
 
     const response = await fetch(
-      "https://fir-opgave-b9105-default-rtdb.europe-west1.firebasedatabase.app/offshore-wind-farms.json",
+      "https://fir-opgave-b9105-default-rtdb.europe-west1.firebasedatabase.app/users.json",
       {
         method: "POST",
         body: JSON.stringify(newSite),

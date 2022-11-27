@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import User from "../components/User";
+import User from "../components/Datasheet";
 import { Container } from "react-bootstrap";
 
 export default function HomePage() {
