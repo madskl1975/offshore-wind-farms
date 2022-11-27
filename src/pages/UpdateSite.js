@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import imgPlaceholder from "../img/img-placeholder.jpg";
 
-export default function UpdatePage() {
+export default function UpdateSite() {
   const params = useParams();
   const url = `https://fir-opgave-b9105-default-rtdb.europe-west1.firebasedatabase.app/users/${params.id}.json`;
   const navigate = useNavigate();
