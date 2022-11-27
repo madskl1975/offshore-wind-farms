@@ -2,17 +2,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import imgPlaceholder from "../img/img-placeholder.jpg";
 
-export default function CreatePage() {
+export default function CreateSite() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [mail, setMail] = useState("");
   const [image, setImage] = useState("");
 
-  async function createUser(event) {
+  async function createSite(event) {
     event.preventDefault();
 
-    const newUser = {
+    const newSite = {
       // key/name: value from state
       name: name,
       title: title,
@@ -21,10 +21,10 @@ export default function CreatePage() {
     };
 
     const response = await fetch(
-      "https://fir-opgave-b9105-default-rtdb.europe-west1.firebasedatabase.app/users.json",
+      "https://fir-opgave-b9105-default-rtdb.europe-west1.firebasedatabase.app/offshore-wind-farms.json",
       {
         method: "POST",
-        body: JSON.stringify(newUser),
+        body: JSON.stringify(newSite),
       }
     );
     if (response.ok) {
@@ -54,11 +54,11 @@ export default function CreatePage() {
   return (
     <section className="page">
       <h1>Create New Offshore Wind Farm</h1>
-      <form onSubmit={createUser}>
+      <form onSubmit={createSite}>
         <input
           type="text"
           value={name}
-          placeholder="Type a name"
+          placeholder="Offshore Wind Farm Name"
           onChange={(e) => setName(e.target.value)}
         />
         <input

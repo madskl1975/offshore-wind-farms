@@ -1,7 +1,7 @@
 import { Container, Nav, Navbar, Button, Form } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
-export default function MainMenu() {
+export default function TopMenu() {
   return (
     <Navbar bg="primary" variant="dark" sticky="top" expand="lg">
       <Container>
