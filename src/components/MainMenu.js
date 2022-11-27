@@ -13,11 +13,11 @@ export default function MainMenu() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            <NavLink className="nav-link" to="/create">
+              Create
+            </NavLink>
             <NavLink className="nav-link" to="/about">
               About
-            </NavLink>
-            <NavLink className="nav-link" to="/contact">
-              Contact
             </NavLink>
           </Nav>
           <Form className="d-flex">

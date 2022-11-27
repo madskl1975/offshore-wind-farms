@@ -5,7 +5,6 @@ import CreatePage from "./pages/CreatePage";
 import UpdatePage from "./pages/UpdatePage";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContactPage";
 
 export default function App() {
   return (
@@ -17,7 +16,6 @@ export default function App() {
         <Route path="/users/:id" element={<UserPage />} />
         <Route path="/update/:id" element={<UpdatePage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </main>

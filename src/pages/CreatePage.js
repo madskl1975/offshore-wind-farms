@@ -53,7 +53,7 @@ export default function CreatePage() {
 
   return (
     <section className="page">
-      <h1>Create New User</h1>
+      <h1>Create New Offshore Wind Farm</h1>
       <form onSubmit={createUser}>
         <input
           type="text"
