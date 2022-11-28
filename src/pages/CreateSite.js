@@ -58,7 +58,7 @@ export default function CreateSite() {
         <input
           type="text"
           value={name}
-          placeholder="Offshore Wind Farm Name"
+          placeholder="Type a name"
           onChange={(e) => setName(e.target.value)}
         />
         <input
