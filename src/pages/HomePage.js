@@ -20,8 +20,7 @@ export default function HomePage() {
     ); // read all users from firebase
     const data = await response.json();
     console.log(data);
-    const array = Object.keys(data).map((key) => ({ id: key, ...data[key] })); // from object to array
-    console.log(array);
+    const users = Object.keys(data).map((key) => ({ id: key, ...data[key] })); // from object to array
     sortData(users); // set the state with fetched data
   }
   function sortData(users) {
@@ -37,28 +36,8 @@ export default function HomePage() {
     } else {
       return users;
     }
-
     setUsers(sortedData);
   }
-
-  // function sortProducts(event) {
-  //   const option = event.target.value;
-  //   if (option === "brand") {
-  //     console.log("brand");
-  //     productList.sort((product1, product2) =>
-  //       product1.brand.localeCompare(product2.brand)
-  //     );
-  //   } else if (option === "model") {
-  //     console.log("model");
-  //     productList.sort((product1, product2) =>
-  //       product1.model.localeCompare(product2.model)
-  //     );
-  //   } else if (option === "price") {
-  //     console.log("price");
-  //     productList.sort((product1, product2) => product1.price - product2.price);
-  //   }
-  //   displayProducts(productList);
-  // }
 
   return (
     <header className="p-5 mb-4 bg-light">
