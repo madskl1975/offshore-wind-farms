@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import User from "../components/Datasheet";
-import { Container } from "react-bootstrap";
+import { Container, Button, Form } from "react-bootstrap";
 
 export default function HomePage() {
   const [users, setUsers] = useState([]); // state to handle the data (users)
@@ -42,6 +42,8 @@ export default function HomePage() {
           <a className="btn btn-primary btn-lg" href="/create" role="button">
             Create Offshore Wind Farm
           </a>
+        </header>
+        <section>
           <label>
             <select
               className="form-select"
@@ -54,7 +56,17 @@ export default function HomePage() {
               <option value="title">Title</option>
             </select>
           </label>
-        </header>
+          <label>
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                className="me-2"
+                placeholder="Search"
+              />
+              <Button variant="light">Search</Button>
+            </Form>
+          </label>
+        </section>
         <main>
           <section>
             {usersToDisplay.map((user) => (

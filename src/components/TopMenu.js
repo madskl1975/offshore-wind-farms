@@ -19,16 +19,7 @@ export default function TopMenu() {
             <NavLink className="nav-link" to="/about">
               About
             </NavLink>
-          </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              className="me-2"
-              placeholder="offshore wind"
-              aria-label="Search"
-            />
-            <Button variant="light">Search</Button>
-          </Form>
+          </Nav>        
         </Navbar.Collapse>
       </Container>
     </Navbar>
