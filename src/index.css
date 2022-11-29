@@ -11,3 +11,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* ---------- grid container styling ---------- */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1em;
+    gap: 1em;
+}
+
+@media (min-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 992px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.grid-container > article {
+    text-align: center;
+    padding: 1em 1em;
+    
+}
+
+/* .grid-container > article:hover {
+    
+} */
+
+.grid-container > article img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+}
+
+/* .grid-container > article h2 {
+    
+} */
+
+

@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import User from "../components/Datasheet";
+
 import {
   Container,
-  Button,
+  Row,
+  Col,
   Form,
   FormCheck,
   FormGroup,
-  FormSelect,
+  FormSelect
 } from "react-bootstrap";
+
+
 
 export default function HomePage() {
   const [users, setUsers] = useState([]); // state to handle the data (users)
@@ -56,60 +60,74 @@ export default function HomePage() {
   return (
     <>
       <Container className="py-5">
-        <header className="p-5 mb-4 bg-light">
-          <h1 className="display-5 fw-bold">Offshore Wind Farms</h1>
-          <p className="col-md-8 fs-4">
-            Explore the world's blue energy power plants
-          </p>
-          <a className="btn btn-primary btn-lg" href="/create" role="button">
-            Create Offshore Wind Farm
-          </a>
-        </header>
-        <section>
-          <Form className="d-flex">
-            <FormGroup className="p-2 mb-1">
-              <Form.Control
-                className="me-2"
-                type="search"
-                placeholder="Search by name"
-                onChange={(e) => setSearchValue(e.target.value)}
-              />
-            </FormGroup>
-            <FormGroup className="p-2 mb-1">
-              <FormCheck
-                type="checkbox"
-                checked={showSeniorLecturers}
-                onChange={() => setShowSeniorLectures(!showSeniorLecturers)}
-                label="Show Head of Department"
-              ></FormCheck>
-            </FormGroup>
-            <FormGroup className="p-2 mb-1">
-              <FormCheck
-                type="checkbox"
-                checked={showHeadOfDepartment}
-                onChange={() => setShowHeadOfDepartment(!showHeadOfDepartment)}
-                label="Show Senior Lecturer"
-              ></FormCheck>
-            </FormGroup>
-            <FormGroup className="p-2 mb-1">
-              <FormSelect
-                className="form-select"
-                onChange={(e) => setSortBy(e.target.value)}
+        <Row>
+          <Col>
+            <header className="p-5 mb-4 bg-light">
+              <h1 className="display-5 fw-bold">Offshore Wind Farms</h1>
+              <p className="col-md-8 fs-4">
+                Explore the world's blue energy power plants
+              </p>
+              <a
+                className="btn btn-primary btn-lg"
+                href="/create"
+                role="button"
               >
-                <option value="default" selected disabled>
-                  Sort by
-                </option>
-                <option value="name">Name</option>
-                <option value="title">Title</option>
-              </FormSelect>
-            </FormGroup>
-          </Form>
-        </section>
+                Create Offshore Wind Farm
+              </a>
+            </header>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <section>
+              <Form className="d-flex">
+                <FormGroup className="p-2 mb-1">
+                  <Form.Control
+                    className="me-2"
+                    type="search"
+                    placeholder="Search by name"
+                    onChange={(e) => setSearchValue(e.target.value)}
+                  />
+                </FormGroup>
+                <FormGroup className="p-2 mb-1">
+                  <FormCheck
+                    type="checkbox"
+                    checked={showSeniorLecturers}
+                    onChange={() => setShowSeniorLectures(!showSeniorLecturers)}
+                    label="Show Head of Department"
+                  ></FormCheck>
+                </FormGroup>
+                <FormGroup className="p-2 mb-1">
+                  <FormCheck
+                    type="checkbox"
+                    checked={showHeadOfDepartment}
+                    onChange={() =>
+                      setShowHeadOfDepartment(!showHeadOfDepartment)
+                    }
+                    label="Show Senior Lecturer"
+                  ></FormCheck>
+                </FormGroup>
+                <FormGroup className="p-2 mb-1">
+                  <FormSelect
+                    className="form-select"
+                    onChange={(e) => setSortBy(e.target.value)}
+                  >
+                    <option value="default" selected disabled>
+                      Sort by
+                    </option>
+                    <option value="name">Name</option>
+                    <option value="title">Title</option>
+                  </FormSelect>
+                </FormGroup>
+              </Form>
+            </section>
+          </Col>
+        </Row>
         <main>
-          <section>
-            {usersToDisplay.map((user) => (
-              <User key={user.id} user={user} />
-            ))}
+          <section className="grid-container">
+              {usersToDisplay.map((user) => (
+                <User key={user.id} user={user} />
+              ))}
           </section>
         </main>
       </Container>
