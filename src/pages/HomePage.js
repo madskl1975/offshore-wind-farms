@@ -1,11 +1,21 @@
 import { useEffect, useState } from "react";
 import User from "../components/Datasheet";
-import { Container, Button, Form } from "react-bootstrap";
+import {
+  Container,
+  Button,
+  Form,
+  FormCheck,
+  FormGroup,
+  FormSelect,
+} from "react-bootstrap";
 
 export default function HomePage() {
   const [users, setUsers] = useState([]); // state to handle the data (users)
   // users: name of the state
   // setUsers: name of the function to set the state
+  const [searchValue, setSearchValue] = useState("");
+  const [showSeniorLecturers, setShowSeniorLectures] = useState(true);
+  const [showHeadOfDepartment, setShowHeadOfDepartment] = useState(true);
   const [sortBy, setSortBy] = useState("name");
 
   //the side effect - fetch users
@@ -23,9 +33,21 @@ export default function HomePage() {
 
   let usersToDisplay = [...users]; // copy users array
 
-  // if (searchValue) {
-  //  usersToDisplay= usersToDisplay.filter(user => user.name.toLowerCase().includes(searchValue.toLowerCase()));
-  //}
+  if (!showSeniorLecturers) {
+    usersToDisplay = usersToDisplay.filter(
+      (user) => user.title === "Senior Lecturer"
+    );
+  }
+  if (!showHeadOfDepartment) {
+    usersToDisplay = usersToDisplay.filter(
+      (user) => user.title === "Head of Department"
+    );
+  }
+  if (searchValue) {
+    usersToDisplay = usersToDisplay.filter((user) =>
+      user.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  }
 
   usersToDisplay.sort((user1, user2) =>
     user1[sortBy].localeCompare(user2[sortBy])
@@ -44,28 +66,44 @@ export default function HomePage() {
           </a>
         </header>
         <section>
-          <label>
-            <select
-              className="form-select"
-              onChange={(e) => setSortBy(e.target.value)}
-            >
-              <option value="default" selected disabled>
-                Sort by
-              </option>
-              <option value="name">Name</option>
-              <option value="title">Title</option>
-            </select>
-          </label>
-          <label>
-            <Form className="d-flex">
+          <Form className="d-flex">
+            <FormGroup className="p-2 mb-1">
               <Form.Control
-                type="search"
                 className="me-2"
-                placeholder="Search"
+                type="search"
+                placeholder="Search by name"
+                onChange={(e) => setSearchValue(e.target.value)}
               />
-              <Button variant="light">Search</Button>
-            </Form>
-          </label>
+            </FormGroup>
+            <FormGroup className="p-2 mb-1">
+              <FormCheck
+                type="checkbox"
+                checked={showSeniorLecturers}
+                onChange={() => setShowSeniorLectures(!showSeniorLecturers)}
+                label="Show Head of Department"
+              ></FormCheck>
+            </FormGroup>
+            <FormGroup className="p-2 mb-1">
+              <FormCheck
+                type="checkbox"
+                checked={showHeadOfDepartment}
+                onChange={() => setShowHeadOfDepartment(!showHeadOfDepartment)}
+                label="Show Senior Lecturer"
+              ></FormCheck>
+            </FormGroup>
+            <FormGroup className="p-2 mb-1">
+              <FormSelect
+                className="form-select"
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option value="default" selected disabled>
+                  Sort by
+                </option>
+                <option value="name">Name</option>
+                <option value="title">Title</option>
+              </FormSelect>
+            </FormGroup>
+          </Form>
         </section>
         <main>
           <section>
