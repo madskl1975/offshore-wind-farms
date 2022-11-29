@@ -1,41 +1,44 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 /* ---------- grid container styling ---------- */
 .grid-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 1em;
-    gap: 1em;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 1em;
+  gap: 1em;
 }
 
 @media (min-width: 600px) {
-    .grid-container {
-        grid-template-columns: 1fr 1fr;
-    }
+  .grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (min-width: 992px) {
-    .grid-container {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
+  .grid-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .grid-container > article {
-    text-align: center;
-    padding: 1em 1em;
-    
+  border: 2px groove #f8f9fa;
+  border-radius: 3%;
+  padding: 1em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* .grid-container > article:hover {
@@ -43,13 +46,11 @@ code {
 } */
 
 .grid-container > article img {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
+  width: 100%;
+  max-width: 350px;
+  height: auto;
 }
 
 /* .grid-container > article h2 {
     
 } */
-
-
