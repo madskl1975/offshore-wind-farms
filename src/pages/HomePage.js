@@ -106,21 +106,9 @@ export default function HomePage() {
       </Form>
       <Container>
         <Row className="pb-4">
-          <Col lg={4} md={4} sm={6}>
             {usersToDisplay.map((user) => (
               <User key={user.id} user={user} />
             ))}
-          </Col>
-          <Col lg={4} md={4} sm={6}>
-            {usersToDisplay.map((user) => (
-              <User key={user.id} user={user} />
-            ))}
-          </Col>
-          <Col lg={4} md={4} sm={6}>
-            {usersToDisplay.map((user) => (
-              <User key={user.id} user={user} />
-            ))}
-          </Col>
         </Row>
       </Container>
     </>
