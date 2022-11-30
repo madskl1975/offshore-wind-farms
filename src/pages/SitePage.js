@@ -38,22 +38,24 @@ export default function UserPage() {
   }
 
   return (
-    <section className="page">
-      <article className="user-detail">
-        <img src={user.image} alt={user.name} />
-        <section>
-          <h1>{user.name}</h1>
-          <p>{user.title}</p>
-          <p>
-            <a href={`mailto: ${user.mail}`}>{user.mail}</a> |{" "}
-            <a href={`tel: ${user.phone}`}>{user.phone}</a>
-          </p>
-          <button onClick={showUpdate}>Update user</button>
-          <button className="btn-outline" onClick={showDeleteDialog}>
-            Delete user
-          </button>
-        </section>
-      </article>
-    </section>
+    <>
+      <section className="page">
+        <article className="user-detail">
+          <img src={user.image} alt={user.name} />
+          <section>
+            <h1>{user.name}</h1>
+            <p>{user.title}</p>
+            <p>
+              <a href={`mailto: ${user.mail}`}>{user.mail}</a> |{" "}
+              <a href={`tel: ${user.phone}`}>{user.phone}</a>
+            </p>
+            <button onClick={showUpdate}>Update user</button>
+            <button className="btn-outline" onClick={showDeleteDialog}>
+              Delete user
+            </button>
+          </section>
+        </article>
+      </section>
+    </>
   );
 }

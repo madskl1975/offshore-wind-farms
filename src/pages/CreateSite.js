@@ -52,43 +52,45 @@ export default function CreateSite() {
   }
 
   return (
-    <section className="page">
-      <h1>Create New Offshore Wind Farm</h1>
-      <form onSubmit={createSite}>
-        <input
-          type="text"
-          value={name}
-          placeholder="Type a name"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          value={title}
-          placeholder="Type a title"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="mail"
-          value={mail}
-          placeholder="Type a mail"
-          onChange={(e) => setMail(e.target.value)}
-        />
-        <label>
+    <>
+      <section className="page">
+        <h1>Create New Offshore Wind Farm</h1>
+        <form onSubmit={createSite}>
           <input
-            type="file"
-            className="file-input"
-            accept="image/*"
-            onChange={handleImageChange}
+            type="text"
+            value={name}
+            placeholder="Type a name"
+            onChange={(e) => setName(e.target.value)}
           />
-          <img
-            className="image-preview"
-            src={image}
-            alt="Choose"
-            onError={(event) => (event.target.src = imgPlaceholder)}
+          <input
+            type="text"
+            value={title}
+            placeholder="Type a title"
+            onChange={(e) => setTitle(e.target.value)}
           />
-        </label>
-        <button>Save</button>
-      </form>
-    </section>
+          <input
+            type="mail"
+            value={mail}
+            placeholder="Type a mail"
+            onChange={(e) => setMail(e.target.value)}
+          />
+          <label>
+            <input
+              type="file"
+              className="file-input"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+            <img
+              className="image-preview"
+              src={image}
+              alt="Choose"
+              onError={(event) => (event.target.src = imgPlaceholder)}
+            />
+          </label>
+          <button>Save</button>
+        </form>
+      </section>
+    </>
   );
 }

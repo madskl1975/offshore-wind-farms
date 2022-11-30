@@ -13,7 +13,7 @@ code {
 }
 
 /* ---------- grid container styling ---------- */
-.grid-container {
+ /* .grid-container {
   display: grid;
   grid-template-columns: 1fr;
   padding: 1em;
@@ -32,7 +32,7 @@ code {
   }
 }
 
-.grid-container > article {
+/* .grid-container > article {
   border: 2px groove #f8f9fa;
   border-radius: 3%;
   padding: 1em;
@@ -43,7 +43,7 @@ code {
 
 /* .grid-container > article:hover {
     
-} */
+} 
 
 .grid-container > article img {
   width: 100%;
@@ -51,6 +51,6 @@ code {
   height: auto;
 }
 
-/* .grid-container > article h2 {
+.grid-container > article h2 {
     
 } */

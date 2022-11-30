@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import TopMenu from "./components/TopMenu";
+import Footer from "./components/Footer";
 import SitePage from "./pages/SitePage";
 import CreateSite from "./pages/CreateSite";
 import UpdateSite from "./pages/UpdateSite";
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <Footer />
     </main>
   );
 }
