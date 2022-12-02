@@ -25,9 +25,13 @@ export default function HomePage() {
       const response = await fetch(
         "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json"
       );
+      console.log(response);
       const data = await response.json();
+      console.log(data);
       const sites = Object.keys(data).map((key) => ({ id: key, ...data[key] })); // from object to array
+      console.log(sites);
       setSites(sites);
+      console.log(setSites);
     }
     getData();
   }, []); // <--- "[]" VERY IMPORTANT!!!
@@ -97,10 +101,7 @@ export default function HomePage() {
             className="form-select"
             onChange={(e) => setSortBy(e.target.value)}
           >
-            <option value="default" selected disabled>
-              Sort by
-            </option>
-            <option value="name">Name</option>
+            <option value="name">Wind Farm Name</option>
             <option value="country">Country</option>
           </FormSelect>
         </FormGroup>

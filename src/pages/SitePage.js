@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function SitePage() {
-  const [site, setSite] = useState([]); // state to handle the data (user)
+  const [site, setSite] = useState([]); // state to handle the data (site)
   const params = useParams();
   const url = `https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms/${params.id}.json`;
   const navigate = useNavigate();
 
-  //the side effect - fetch user
+  //the side effect - fetch site
   useEffect(() => {
     async function getSite() {
-      const response = await fetch(url); // read one user from firebase
+      const response = await fetch(url); // read one site from firebase
       const data = await response.json();
       setSite(data); // set the state with fetched data
     }

@@ -19,7 +19,7 @@ export default function CreateSite() {
     };
 
     const response = await fetch(
-      "https://https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json",
+      "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json",
       {
         method: "POST",
         body: JSON.stringify(newSite),

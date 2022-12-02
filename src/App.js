@@ -14,7 +14,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/create" element={<CreateSite />} />
-        <Route path="/users/:id" element={<SitePage />} />
+        <Route path="/sites/:id" element={<SitePage />} />
         <Route path="/update/:id" element={<UpdateSite />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<Navigate to="/" />} />
