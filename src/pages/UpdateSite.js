@@ -4,39 +4,36 @@ import imgPlaceholder from "../img/img-placeholder.jpg";
 
 export default function UpdateSite() {
   const params = useParams();
-  const url = `https://fir-opgave-b9105-default-rtdb.europe-west1.firebasedatabase.app/users/${params.id}.json`;
+  const url = `https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms/${params.id}.json`;
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [title, setTitle] = useState("");
-  const [mail, setMail] = useState("");
+  const [country, setCountry] = useState("");
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    async function getUser() {
+    async function getSite() {
       const response = await fetch(url); // read one user from firebase
-      const user = await response.json();
-      setName(user.name);
-      setTitle(user.title);
-      setMail(user.mail);
-      setImage(user.image);
+      const site = await response.json();
+      setName(site.name);
+      setCountry(site.country);
+      setImage(site.image);
     }
-    getUser();
+    getSite();
   }, [url]); // <--- "[]" VERY IMPORTANT!!!
 
-  async function updateUser(event) {
+  async function updateSite(event) {
     event.preventDefault();
 
-    const userToUpdate = {
+    const siteToUpdate = {
       // key/name: value from state
       name: name,
-      title: title,
-      mail: mail,
+      country: country,
       image: image,
     };
 
     const response = await fetch(url, {
       method: "PUT",
-      body: JSON.stringify(userToUpdate),
+      body: JSON.stringify(siteToUpdate),
     });
     if (response.ok) {
       navigate("/");
@@ -58,14 +55,14 @@ export default function UpdateSite() {
       reader.readAsDataURL(file);
     } else {
       // if not below 0.5MB display an error message using the errorMessage state
-      console.log("The image file is too big!");
+      console.log("The image file is too big!"); //tilføj alert her
     }
   }
 
   return (
     <section className="page">
       <h1>Update "{name}"</h1>
-      <form onSubmit={updateUser}>
+      <form onSubmit={updateSite}>
         <input
           type="text"
           value={name}
@@ -74,15 +71,9 @@ export default function UpdateSite() {
         />
         <input
           type="text"
-          value={title}
-          placeholder="Type a title"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="mail"
-          value={mail}
-          placeholder="Type a mail"
-          onChange={(e) => setMail(e.target.value)}
+          value={country}
+          placeholder="Type a country"
+          onChange={(e) => setCountry(e.target.value)}
         />
         <label>
           <input

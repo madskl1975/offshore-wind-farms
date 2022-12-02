@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import User from "../components/HomePageCards";
+import Site from "../components/HomePageCards";
 
 import {
   Container,
   Row,
-  Col,
   Form,
   FormCheck,
   FormGroup,
@@ -12,47 +11,47 @@ import {
 } from "react-bootstrap";
 
 export default function HomePage() {
-  const [users, setUsers] = useState([]); // state to handle the data (users)
-  // users: name of the state
-  // setUsers: name of the function to set the state
+  const [sites, setSites] = useState([]);
+  // sites: name of the state, state to handle the data
+  // setSites: name of the function to set the state
   const [searchValue, setSearchValue] = useState("");
-  const [showSeniorLecturers, setShowSeniorLectures] = useState(true);
-  const [showHeadOfDepartment, setShowHeadOfDepartment] = useState(true);
+  const [showCommissionedSites, setShowCommissionedSites] = useState(true);
+  const [showDecommissionedSites, setShowDecommissionedSites] = useState(true);
   const [sortBy, setSortBy] = useState("name");
 
-  //the side effect - fetch users
+  //the side effect - fetch sites
   useEffect(() => {
     async function getData() {
       const response = await fetch(
-        "https://fir-opgave-b9105-default-rtdb.europe-west1.firebasedatabase.app/users.json"
+        "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json"
       );
       const data = await response.json();
-      const users = Object.keys(data).map((key) => ({ id: key, ...data[key] })); // from object to array
-      setUsers(users);
+      const sites = Object.keys(data).map((key) => ({ id: key, ...data[key] })); // from object to array
+      setSites(sites);
     }
     getData();
   }, []); // <--- "[]" VERY IMPORTANT!!!
 
-  let usersToDisplay = [...users]; // copy users array
+  let sitesToDisplay = [...sites]; // copy sites array
 
-  if (!showSeniorLecturers) {
-    usersToDisplay = usersToDisplay.filter(
-      (user) => user.title === "Senior Lecturer"
+  if (!showCommissionedSites) {
+    sitesToDisplay = sitesToDisplay.filter(
+      (site) => site.developmentStatus === "Commissioned"
     );
   }
-  if (!showHeadOfDepartment) {
-    usersToDisplay = usersToDisplay.filter(
-      (user) => user.title === "Head of Department"
+  if (!showDecommissionedSites) {
+    sitesToDisplay = sitesToDisplay.filter(
+      (site) => site.developmentStatus === "Decommissioned"
     );
   }
   if (searchValue) {
-    usersToDisplay = usersToDisplay.filter((user) =>
-      user.name.toLowerCase().includes(searchValue.toLowerCase())
+    sitesToDisplay = sitesToDisplay.filter((site) =>
+      site.name.toLowerCase().includes(searchValue.toLowerCase())
     );
   }
 
-  usersToDisplay.sort((user1, user2) =>
-    user1[sortBy].localeCompare(user2[sortBy])
+  sitesToDisplay.sort((site1, site2) =>
+    site1[sortBy].localeCompare(site2[sortBy])
   );
 
   return (
@@ -78,17 +77,19 @@ export default function HomePage() {
         <FormGroup className="p-2 mb-1">
           <FormCheck
             type="checkbox"
-            checked={showSeniorLecturers}
-            onChange={() => setShowSeniorLectures(!showSeniorLecturers)}
-            label="Show Head of Department"
+            checked={showCommissionedSites}
+            onChange={() => setShowCommissionedSites(!showCommissionedSites)}
+            label="Show commissioned sites"
           ></FormCheck>
         </FormGroup>
         <FormGroup className="p-2 mb-1">
           <FormCheck
             type="checkbox"
-            checked={showHeadOfDepartment}
-            onChange={() => setShowHeadOfDepartment(!showHeadOfDepartment)}
-            label="Show Senior Lecturer"
+            checked={showDecommissionedSites}
+            onChange={() =>
+              setShowDecommissionedSites(!showDecommissionedSites)
+            }
+            label="Show decommissioned sites"
           ></FormCheck>
         </FormGroup>
         <FormGroup className="p-2 mb-1">
@@ -100,15 +101,15 @@ export default function HomePage() {
               Sort by
             </option>
             <option value="name">Name</option>
-            <option value="title">Title</option>
+            <option value="country">Country</option>
           </FormSelect>
         </FormGroup>
       </Form>
       <Container>
         <Row className="pb-4">
-            {usersToDisplay.map((user) => (
-              <User key={user.id} user={user} />
-            ))}
+          {sitesToDisplay.map((site) => (
+            <Site key={site.id} site={site} />
+          ))}
         </Row>
       </Container>
     </>
