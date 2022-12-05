@@ -60,57 +60,53 @@ export default function HomePage() {
 
   return (
     <>
-      <Container>
-        <header className="p-5 mb-4 bg-light">
-          <h1 className="display-5 fw-bold">Offshore Wind Farms</h1>
-          <p className="col-md-8 fs-4">
-            Explore the world's blue energy power plants
-          </p>
-          <a className="btn btn-primary btn-lg" href="/create" role="button">
-            Create Offshore Wind Farm
-          </a>
-        </header>
-        <Form className="d-flex">
-          <FormGroup className="p-2 mb-1">
-            <Form.Control
-              className="me-2"
-              type="search"
-              placeholder="Search by name"
-              onChange={(e) => setSearchValue(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup className="p-2 mb-1">
-            <FormCheck
-              type="checkbox"
-              checked={showCommissionedSites}
-              onChange={() => setShowCommissionedSites(!showCommissionedSites)}
-              label="Commission"
-            ></FormCheck>
-          </FormGroup>
-          <FormGroup className="p-2 mb-1">
-            <FormCheck
-              type="checkbox"
-              checked={showInstallationSites}
-              onChange={() => setShowInstallationSites(!showInstallationSites)}
-              label="Installation"
-            ></FormCheck>
-          </FormGroup>
-          <FormGroup className="p-2 mb-1">
-            <FormSelect
-              className="form-select"
-              onChange={(e) => setSortBy(e.target.value)}
-            >
-              <option value="name">Sort by Name</option>
-              <option value="country">Sort by Country</option>
-            </FormSelect>
-          </FormGroup>
-        </Form>
-        <Row className="pb-4">
-          {sitesToDisplay.map((site) => (
-            <Site key={site.id} site={site} />
-          ))}
-        </Row>
-      </Container>
+      <header className="p-5 bg-light">
+        <h1 className="fs-1 fw-bold">Offshore Wind Farms</h1>
+        <p className="fs-4">Explore the world's blue energy power plants</p>
+        <a className="btn btn-primary btn-lg" href="/create" role="button">
+          Create Offshore Wind Farm
+        </a>
+      </header>
+      <Form className="d-flex flex-wrap align-items-center p-4 mx-5">
+        <FormGroup>
+          <Form.Control
+            type="search"
+            placeholder="Search by name"
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <FormCheck
+            type="checkbox"
+            checked={showCommissionedSites}
+            onChange={() => setShowCommissionedSites(!showCommissionedSites)}
+            label="Commission"
+            className="mx-4"
+          ></FormCheck>
+        </FormGroup>
+        <FormGroup>
+          <FormCheck
+            type="checkbox"
+            checked={showInstallationSites}
+            onChange={() => setShowInstallationSites(!showInstallationSites)}
+            label="Installation"
+          ></FormCheck>
+        </FormGroup>
+        <FormGroup>
+          <FormSelect
+            className="mx-4"
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option value="name">Sort by name</option>
+            <option value="country">Sort by country</option>
+          </FormSelect>
+        </FormGroup>
+      </Form>
+      <Row className="ms-5 p-3">
+        {sitesToDisplay.map((site) => (
+          <Site key={site.id} site={site} />
+        ))}
+      </Row>
     </>
   );
 }
