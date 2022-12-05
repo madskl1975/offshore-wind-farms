@@ -7,7 +7,7 @@ export default function Site({ site }) {
   // {id: "...", image: "...", mail: "...", name: "...", phone: "...", title: "..."}
 
   function handleClick() {
-    navigate(`offshoreWindFarms/${site.id}`);
+    navigate(`site/${site.id}`);
   }
 
   return (
