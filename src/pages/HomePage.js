@@ -17,7 +17,6 @@ export default function HomePage() {
   const [searchValue, setSearchValue] = useState("");
   const [showCommissionedSites, setShowCommissionedSites] = useState(true);
   const [showInstallationSites, setShowInstallationSites] = useState(true);
-  const [showDecommissionedSites, setShowDecommissionedSites] = useState(true);
   const [sortBy, setSortBy] = useState("name");
 
   //the side effect - fetch sites
@@ -41,17 +40,12 @@ export default function HomePage() {
 
   if (!showCommissionedSites) {
     sitesToDisplay = sitesToDisplay.filter(
-      (site) => site.developmentStatus === "Commissioned"
+      (site) => site.developmentStatus === "Installation"
     );
   }
   if (!showInstallationSites) {
     sitesToDisplay = sitesToDisplay.filter(
-      (site) => site.developmentStatus === "Installation"
-    );
-  }
-  if (!showDecommissionedSites) {
-    sitesToDisplay = sitesToDisplay.filter(
-      (site) => site.developmentStatus === "Decommissioned"
+      (site) => site.developmentStatus === "Commissioned"
     );
   }
   if (searchValue) {
@@ -66,61 +60,51 @@ export default function HomePage() {
 
   return (
     <>
-      <header className="p-5 mb-4 bg-light">
-        <h1 className="display-5 fw-bold">Offshore Wind Farms</h1>
-        <p className="col-md-8 fs-4">
-          Explore the world's blue energy power plants
-        </p>
-        <a className="btn btn-primary btn-lg" href="/create" role="button">
-          Create Offshore Wind Farm
-        </a>
-      </header>
-      <Form className="d-flex">
-        <FormGroup className="p-2 mb-1">
-          <Form.Control
-            className="me-2"
-            type="search"
-            placeholder="Search by name"
-            onChange={(e) => setSearchValue(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup className="p-2 mb-1">
-          <FormCheck
-            type="checkbox"
-            checked={showCommissionedSites}
-            onChange={() => setShowCommissionedSites(!showCommissionedSites)}
-            label="Commission"
-          ></FormCheck>
-        </FormGroup>
-        <FormGroup className="p-2 mb-1">
-          <FormCheck
-            type="checkbox"
-            checked={showCommissionedSites}
-            onChange={() => setShowInstallationSites(!showInstallationSites)}
-            label="Installation"
-          ></FormCheck>
-        </FormGroup>
-        <FormGroup className="p-2 mb-1">
-          <FormCheck
-            type="checkbox"
-            checked={showDecommissionedSites}
-            onChange={() =>
-              setShowDecommissionedSites(!showDecommissionedSites)
-            }
-            label="Decommission"
-          ></FormCheck>
-        </FormGroup>
-        <FormGroup className="p-2 mb-1">
-          <FormSelect
-            className="form-select"
-            onChange={(e) => setSortBy(e.target.value)}
-          >
-            <option value="name">Wind Farm Name</option>
-            <option value="country">Country</option>
-          </FormSelect>
-        </FormGroup>
-      </Form>
       <Container>
+        <header className="p-5 mb-4 bg-light">
+          <h1 className="display-5 fw-bold">Offshore Wind Farms</h1>
+          <p className="col-md-8 fs-4">
+            Explore the world's blue energy power plants
+          </p>
+          <a className="btn btn-primary btn-lg" href="/create" role="button">
+            Create Offshore Wind Farm
+          </a>
+        </header>
+        <Form className="d-flex">
+          <FormGroup className="p-2 mb-1">
+            <Form.Control
+              className="me-2"
+              type="search"
+              placeholder="Search by name"
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup className="p-2 mb-1">
+            <FormCheck
+              type="checkbox"
+              checked={showCommissionedSites}
+              onChange={() => setShowCommissionedSites(!showCommissionedSites)}
+              label="Commission"
+            ></FormCheck>
+          </FormGroup>
+          <FormGroup className="p-2 mb-1">
+            <FormCheck
+              type="checkbox"
+              checked={showInstallationSites}
+              onChange={() => setShowInstallationSites(!showInstallationSites)}
+              label="Installation"
+            ></FormCheck>
+          </FormGroup>
+          <FormGroup className="p-2 mb-1">
+            <FormSelect
+              className="form-select"
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option value="name">Sort by Name</option>
+              <option value="country">Sort by Country</option>
+            </FormSelect>
+          </FormGroup>
+        </Form>
         <Row className="pb-4">
           {sitesToDisplay.map((site) => (
             <Site key={site.id} site={site} />
