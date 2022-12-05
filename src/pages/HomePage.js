@@ -16,6 +16,7 @@ export default function HomePage() {
   // setSites: name of the function to set the state
   const [searchValue, setSearchValue] = useState("");
   const [showCommissionedSites, setShowCommissionedSites] = useState(true);
+  const [showInstallationSites, setShowInstallationSites] = useState(true);
   const [showDecommissionedSites, setShowDecommissionedSites] = useState(true);
   const [sortBy, setSortBy] = useState("name");
 
@@ -41,6 +42,11 @@ export default function HomePage() {
   if (!showCommissionedSites) {
     sitesToDisplay = sitesToDisplay.filter(
       (site) => site.developmentStatus === "Commissioned"
+    );
+  }
+  if (!showInstallationSites) {
+    sitesToDisplay = sitesToDisplay.filter(
+      (site) => site.developmentStatus === "Installation"
     );
   }
   if (!showDecommissionedSites) {
@@ -83,7 +89,15 @@ export default function HomePage() {
             type="checkbox"
             checked={showCommissionedSites}
             onChange={() => setShowCommissionedSites(!showCommissionedSites)}
-            label="Show commissioned sites"
+            label="Commission"
+          ></FormCheck>
+        </FormGroup>
+        <FormGroup className="p-2 mb-1">
+          <FormCheck
+            type="checkbox"
+            checked={showCommissionedSites}
+            onChange={() => setShowInstallationSites(!showInstallationSites)}
+            label="Installation"
           ></FormCheck>
         </FormGroup>
         <FormGroup className="p-2 mb-1">
@@ -93,7 +107,7 @@ export default function HomePage() {
             onChange={() =>
               setShowDecommissionedSites(!showDecommissionedSites)
             }
-            label="Show decommissioned sites"
+            label="Decommission"
           ></FormCheck>
         </FormGroup>
         <FormGroup className="p-2 mb-1">
