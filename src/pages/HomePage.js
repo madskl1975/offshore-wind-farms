@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import Site from "../components/HomePageCards";
 
 import {
-  Container,
   Row,
   Form,
-  FormCheck,
   FormGroup,
   FormSelect,
 } from "react-bootstrap";
@@ -63,8 +61,8 @@ export default function HomePage() {
       <header className="p-5 bg-light">
         <h1 className="fs-1 fw-bold">Offshore Wind Farms</h1>
         <p className="fs-4">Explore the world's blue energy power plants</p>
-        <a className="btn btn-primary btn-lg" href="/create" role="button">
-          Create Offshore Wind Farm
+        <a className="btn btn-primary btn-lg" href="/upload" role="button">
+          Upload Offshore Wind Farm
         </a>
       </header>
       <Form className="d-flex flex-wrap align-items-center p-4 mx-5">
@@ -99,6 +97,7 @@ export default function HomePage() {
           >
             <option value="name">Sort by name</option>
             <option value="country">Sort by country</option>
+            <option value="installedCapacity">Sort by capacity</option>
           </FormSelect>
         </FormGroup>
       </Form>

@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { Card, Row, Col, Form, Button, Container } from "react-bootstrap";
 import imgPlaceholder from "../img/img-placeholder.jpg";
 
-export default function CreateSite() {
+export default function UploadSite() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [developmentStatus, setDevelopmentStatus] = useState("");
   const [country, setCountry] = useState("");
 
-  async function createSite(event) {
+  async function uploadSite(event) {
     event.preventDefault();
 
     const newSite = {
@@ -63,9 +63,9 @@ export default function CreateSite() {
             onError={(event) => (event.target.src = imgPlaceholder)}
           />
           <Card.Title className="mb-3 p-3">
-            <h1> Create site</h1>
+            <h1>Upload site</h1>
           </Card.Title>
-          <Form onSubmit={createSite}>
+          <Form onSubmit={uploadSite}>
             <Form.Group className="p-3">
               <Row className="mb-3">
                 <Col>
@@ -111,16 +111,16 @@ export default function CreateSite() {
                 <Col>
                   <Form.Label>Development Status</Form.Label>
                 </Col>
-                {/* <Col>
+                <Col>
                   <Form.Select
-                    value="select"
                     onChange={(e) => setDevelopmentStatus(e.target.value)}
                   >
+                    <option value="" selected disabled>Select</option>
                     <option value={developmentStatus}>Decommission</option>
                     <option value={developmentStatus}>Commission</option>
                     <option value={developmentStatus}>Installation</option>
                   </Form.Select>
-                </Col> */}
+                </Col>
               </Row>
               <Row>
                 <Col>

@@ -7,7 +7,6 @@ import {
   Tabs,
   Tab,
   Button,
-  CardImg,
 } from "react-bootstrap";
 
 export default function SitePage() {

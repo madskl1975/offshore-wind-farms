@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 export default function TopMenu() {
@@ -12,11 +12,8 @@ export default function TopMenu() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <NavLink className="nav-link" to="/create">
-            Create
-          </NavLink>
-          <NavLink className="nav-link" to="/about">
-            About
+          <NavLink className="nav-link" to="/upload">
+            Upload
           </NavLink>
         </Nav>
       </Navbar.Collapse>
