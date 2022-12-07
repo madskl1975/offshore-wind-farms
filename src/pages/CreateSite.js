@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Card, Row, Col, Form, Button, Container } from "react-bootstrap";
 import imgPlaceholder from "../img/img-placeholder.jpg";
 
 export default function CreateSite() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [country, setCountry] = useState("");
   const [image, setImage] = useState("");
+  const [developmentStatus, setDevelopmentStatus] = useState("");
+  const [country, setCountry] = useState("");
 
   async function createSite(event) {
     event.preventDefault();
@@ -14,8 +16,9 @@ export default function CreateSite() {
     const newSite = {
       // key/name: value from state
       name: name,
-      country: country,
       image: image,
+      developmentStatus: developmentStatus,
+      country: country,
     };
 
     const response = await fetch(
@@ -51,38 +54,83 @@ export default function CreateSite() {
 
   return (
     <>
-      <section className="page">
-        <h1>Create New Offshore Wind Farm</h1>
-        <form onSubmit={createSite}>
-          <input
-            type="text"
-            value={name}
-            placeholder="Type a name"
-            onChange={(e) => setName(e.target.value)}
+      <Container className="d-flex justify-content-center">
+        <Card style={{ width: "60%" }} className="m-5">
+          <Card.Img
+            variant="top"
+            src={image}
+            alt="Choose"
+            onError={(event) => (event.target.src = imgPlaceholder)}
           />
-          <input
-            type="text"
-            value={country}
-            placeholder="Type a country"
-            onChange={(e) => setCountry(e.target.value)}
-          />
-          <label>
-            <input
-              type="file"
-              className="file-input"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-            <img
-              className="image-preview"
-              src={image}
-              alt="Choose"
-              onError={(event) => (event.target.src = imgPlaceholder)}
-            />
-          </label>
-          <button>Save</button>
-        </form>
-      </section>
+          <Card.Title className="mb-3 p-3">
+            <h1> Create site</h1>
+          </Card.Title>
+          <Form onSubmit={createSite}>
+            <Form.Group className="p-3">
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Wind Farm Name</Form.Label>
+                </Col>
+                <Col>
+                  <Form.Control
+                    type="text"
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Wind Farm Image</Form.Label>
+                </Col>
+                <Col>
+                  <Form.Label>
+                    <Form.Control
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                    />
+                  </Form.Label>
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Country</Form.Label>
+                </Col>
+                <Col>
+                  <Form.Control
+                    type="text"
+                    placeholder="Country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Label>Development Status</Form.Label>
+                </Col>
+                {/* <Col>
+                  <Form.Select
+                    value="select"
+                    onChange={(e) => setDevelopmentStatus(e.target.value)}
+                  >
+                    <option value={developmentStatus}>Decommission</option>
+                    <option value={developmentStatus}>Commission</option>
+                    <option value={developmentStatus}>Installation</option>
+                  </Form.Select>
+                </Col> */}
+              </Row>
+              <Row>
+                <Col>
+                  <Button type="submit ">Save</Button>
+                </Col>
+              </Row>
+            </Form.Group>
+          </Form>
+        </Card>
+      </Container>
     </>
   );
 }

@@ -7,8 +7,10 @@ export default function UpdateSite() {
   const url = `https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms/${params.id}.json`;
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [country, setCountry] = useState("");
   const [image, setImage] = useState("");
+  const [country, setCountry] = useState("");
+  // const [distanceFromShore, setDistanceFromShore] = useState();
+  // const [projectStart, setProjectStart] = useState("");
 
   useEffect(() => {
     async function getSite() {
@@ -17,6 +19,8 @@ export default function UpdateSite() {
       setName(site.name);
       setCountry(site.country);
       setImage(site.image);
+      // setDistanceFromShore(site.distanceFromShore);
+      // setProjectStart(site.projectStart);
     }
     getSite();
   }, [url]); // <--- "[]" VERY IMPORTANT!!!
@@ -29,6 +33,8 @@ export default function UpdateSite() {
       name: name,
       country: country,
       image: image,
+      // distanceFromShore: distanceFromShore,
+      // projectStart: projectStart,
     };
 
     const response = await fetch(url, {
@@ -75,6 +81,18 @@ export default function UpdateSite() {
           placeholder="Type a country"
           onChange={(e) => setCountry(e.target.value)}
         />
+        {/* <input
+          type="text"
+          value={distanceFromShoreMin}
+          placeholder="Type a minimum distance from shore"
+          onChange={(e) => setDistanceFromShoreMin(e.target.value)}
+        /> */}
+        {/* <input
+          type="text"
+          value={distanceFromShoreMax}
+          placeholder="Type a maximum distance from shore"
+          onChange={(e) => setDistanceFromShoreMax(e.target.value)}
+        /> */}
         <label>
           <input
             type="file"

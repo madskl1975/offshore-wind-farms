@@ -15,7 +15,7 @@ export default function HomePage() {
   // sites: name of the state, state to handle the data
   // setSites: name of the function to set the state
   const [searchValue, setSearchValue] = useState("");
-  const [showCommissionedSites, setShowCommissionedSites] = useState(true);
+  const [showCommissionSites, setShowCommissionSites] = useState(true);
   const [showInstallationSites, setShowInstallationSites] = useState(true);
   const [sortBy, setSortBy] = useState("name");
 
@@ -38,14 +38,14 @@ export default function HomePage() {
 
   let sitesToDisplay = [...sites]; // copy sites array
 
-  if (!showCommissionedSites) {
+  if (!showCommissionSites) {
     sitesToDisplay = sitesToDisplay.filter(
       (site) => site.developmentStatus === "Installation"
     );
   }
   if (!showInstallationSites) {
     sitesToDisplay = sitesToDisplay.filter(
-      (site) => site.developmentStatus === "Commissioned"
+      (site) => site.developmentStatus === "Commission"
     );
   }
   if (searchValue) {
@@ -76,25 +76,25 @@ export default function HomePage() {
           />
         </FormGroup>
         <FormGroup>
-          <FormCheck
+          <Form.Check
             type="checkbox"
-            checked={showCommissionedSites}
-            onChange={() => setShowCommissionedSites(!showCommissionedSites)}
+            checked={showCommissionSites}
+            onChange={() => setShowCommissionSites(!showCommissionSites)}
             label="Commission"
             className="mx-4"
-          ></FormCheck>
+          />
         </FormGroup>
         <FormGroup>
-          <FormCheck
+          <Form.Check
             type="checkbox"
             checked={showInstallationSites}
             onChange={() => setShowInstallationSites(!showInstallationSites)}
             label="Installation"
-          ></FormCheck>
+          />
         </FormGroup>
         <FormGroup>
           <FormSelect
-            className="mx-4"
+            className="mx-4 text-secondary"
             onChange={(e) => setSortBy(e.target.value)}
           >
             <option value="name">Sort by name</option>

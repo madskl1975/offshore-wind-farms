@@ -6,7 +6,6 @@ import CreateSite from "./pages/CreateSite";
 import UpdateSite from "./pages/UpdateSite";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import { Container } from "react-bootstrap";
 
 export default function App() {
   return (

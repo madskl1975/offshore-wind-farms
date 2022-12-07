@@ -12,45 +12,4 @@ code {
     monospace;
 }
 
-/* ---------- grid container styling ---------- */
- /* .grid-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  padding: 1em;
-  gap: 1em;
-}
 
-@media (min-width: 600px) {
-  .grid-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (min-width: 992px) {
-  .grid-container {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-/* .grid-container > article {
-  border: 2px groove #f8f9fa;
-  border-radius: 3%;
-  padding: 1em;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* .grid-container > article:hover {
-    
-} 
-
-.grid-container > article img {
-  width: 100%;
-  max-width: 350px;
-  height: auto;
-}
-
-.grid-container > article h2 {
-    
-} */
