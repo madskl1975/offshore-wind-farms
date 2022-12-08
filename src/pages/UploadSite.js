@@ -5,15 +5,45 @@ import imgPlaceholder from "../img/img-placeholder.jpg";
 
 export default function UploadSite() {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
+  // const [formData, setFormData] = useState({
+  //   name: "", // text string
+  //   image: "",
+  //   country: "",
+  //   developmentStatus: "",
+  //   installedCapacity: 0, //angives tal sådan?
+  //   projectStartYear: "",
+  //   projectStartMonth: "",
+  //   projectStartEvent: "" //angives projectstart-array sådan eller hvordan med nested data?
+  // });
+  const [name, setName] = useState(""); //linje 18-21 erstattes med linje 8-17
   const [image, setImage] = useState("");
   const [developmentStatus, setDevelopmentStatus] = useState("");
   const [country, setCountry] = useState("");
 
+  // function handleChange(event) {
+  //   const name = event.target.name;
+  //   const type = event.target.type;
+  //   const checked = event.target.checked;
+  //   const value = type === "checkbox" ? checked : event.target.value;
+  // }
+
   async function uploadSite(event) {
     event.preventDefault();
+    // const data = formData
+    // const response = await fetch(
+    //   "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json",
+    //   {
+    //     method: "POST",
+    //     body: JSON.stringify(data),
+    //  }
+    // );
+    //    if (response.ok) {
+    //     navigate("/");
+    //   }
+    // }
 
     const newSite = {
+      // linje 45-63 erstattes af linje 32-43
       // key/name: value from state
       name: name,
       image: image,
@@ -53,6 +83,9 @@ export default function UploadSite() {
   }
 
   return (
+    // return tilpasses props i formData, setFormData.
+    // Spm: hvad med nested {projectStart..}?
+    // og gentagelse inputfelter for projectStart <input>, som hedder Form.Control i Reactbootstrap?
     <>
       <Container className="d-flex justify-content-center">
         <Card style={{ width: "60%" }} className="m-5">
@@ -115,7 +148,9 @@ export default function UploadSite() {
                   <Form.Select
                     onChange={(e) => setDevelopmentStatus(e.target.value)}
                   >
-                    <option value="" selected disabled>Select</option>
+                    <option value="" selected disabled>
+                      Select
+                    </option>
                     <option value={developmentStatus}>Decommission</option>
                     <option value={developmentStatus}>Commission</option>
                     <option value={developmentStatus}>Installation</option>

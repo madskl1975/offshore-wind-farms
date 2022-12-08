@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Card,
-  Row,
-  Col,
-  Tabs,
-  Tab,
-  Button,
-} from "react-bootstrap";
+import { Card, Row, Col, Tabs, Tab, Button } from "react-bootstrap";
 
 export default function SitePage() {
   const [site, setSite] = useState([]); // state to handle the data (site)
@@ -67,9 +60,7 @@ export default function SitePage() {
             <Tab eventKey="Timeline" title="Timeline">
               <Card.Text>
                 <Row className="bg-primary text-dark bg-opacity-10">
-                  <Col className="border border-white">
-                    {site.developmentStatus}
-                  </Col>
+                  <Col className="border border-white">Development status</Col>
                   <Col className="border border-white">
                     {site.developmentStatus}
                   </Col>
@@ -82,9 +73,7 @@ export default function SitePage() {
             >
               <Card.Text>
                 <Row className="bg-primary text-dark bg-opacity-10">
-                  <Col className="border border-white">
-                    {site.developmentStatus}
-                  </Col>
+                  <Col className="border border-white">Development status</Col>
                   <Col className="border border-white">
                     {site.developmentStatus}
                   </Col>
@@ -94,7 +83,9 @@ export default function SitePage() {
           </Tabs>
           <Row>
             <Col>
-              <Button className="me-4 my-3" onClick={showUpdate}>Update</Button>
+              <Button className="me-4 my-3" onClick={showUpdate}>
+                Update
+              </Button>
               <Button onClick={showDeleteDialog}>Delete</Button>
             </Col>
           </Row>
