@@ -171,50 +171,5 @@ export default function UpdateSite() {
         </Card>
       </Container>
     </>
-
-    // <section className="page">
-    //   <h1>Update "{name}"</h1>
-    //   <form onSubmit={updateSite}>
-    //     <input
-    //       type="text"
-    //       value={name}
-    //       placeholder="Type a name"
-    //       onChange={(e) => setName(e.target.value)}
-    //     />
-    //     <input
-    //       type="text"
-    //       value={country}
-    //       placeholder="Type a country"
-    //       onChange={(e) => setCountry(e.target.value)}
-    //     />
-    //     {/* <input
-    //       type="text"
-    //       value={distanceFromShoreMin}
-    //       placeholder="Type a minimum distance from shore"
-    //       onChange={(e) => setDistanceFromShoreMin(e.target.value)}
-    //     /> */}
-    //     {/* <input
-    //       type="text"
-    //       value={distanceFromShoreMax}
-    //       placeholder="Type a maximum distance from shore"
-    //       onChange={(e) => setDistanceFromShoreMax(e.target.value)}
-    //     /> */}
-    //     <label>
-    //       <input
-    //         type="file"
-    //         className="file-input"
-    //         accept="image/*"
-    //         onChange={handleImageChange}
-    //       />
-    //       <img
-    //         className="image-preview"
-    //         src={image}
-    //         alt="Choose"
-    //         onError={(event) => (event.target.src = imgPlaceholder)}
-    //       />
-    //     </label>
-    //     <button>Save</button>
-    //   </form>
-    // </section>
   );
 }

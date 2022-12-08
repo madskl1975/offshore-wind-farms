@@ -1,4 +1,4 @@
-import { Card, Col, ListGroup } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 export default function Site({ site }) {
@@ -24,9 +24,8 @@ export default function Site({ site }) {
           <Card.Subtitle className="mb-2">
             Total Capacity: {site.installedCapacity} MW
           </Card.Subtitle>
-          <Card.Subtitle className="mb-2">
-            88 x Siemens SWT-3.6-107
-          </Card.Subtitle>
+          <Card.Subtitle className="mb-2">Turbine:</Card.Subtitle>
+          <Card.Subtitle className="mb-2">Number:</Card.Subtitle>
         </Card.Body>
       </Card>
     </Col>

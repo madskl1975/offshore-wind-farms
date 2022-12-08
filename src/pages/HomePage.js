@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import Site from "../components/HomePageCards";
 
-import {
-  Row,
-  Form,
-  FormGroup,
-  FormSelect,
-} from "react-bootstrap";
+import { Row, Form, FormGroup, FormSelect } from "react-bootstrap";
 
 export default function HomePage() {
   const [sites, setSites] = useState([]);
@@ -15,7 +10,7 @@ export default function HomePage() {
   const [searchValue, setSearchValue] = useState("");
   const [showCommissionSites, setShowCommissionSites] = useState(true);
   const [showInstallationSites, setShowInstallationSites] = useState(true);
-  const [sortBy, setSortBy] = useState("name");
+  const [sortBy, setSortBy] = useState("name"); // name = default sortering
 
   //the side effect - fetch sites
   useEffect(() => {
@@ -23,13 +18,9 @@ export default function HomePage() {
       const response = await fetch(
         "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json"
       );
-      console.log(response);
       const data = await response.json();
-      console.log(data);
       const sites = Object.keys(data).map((key) => ({ id: key, ...data[key] })); // from object to array
-      console.log(sites);
       setSites(sites);
-      console.log(setSites);
     }
     getData();
   }, []); // <--- "[]" VERY IMPORTANT!!!
@@ -97,7 +88,8 @@ export default function HomePage() {
           >
             <option value="name">Sort by name</option>
             <option value="country">Sort by country</option>
-            <option value="installedCapacity">Sort by capacity</option>
+            <option value="installedCapacity">Sort by capacity</option> virker
+            ikke
           </FormSelect>
         </FormGroup>
       </Form>
