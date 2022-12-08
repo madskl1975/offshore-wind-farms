@@ -43,7 +43,7 @@ export default function UploadSite() {
     // }
 
     const newSite = {
-      // linje 45-63 erstattes af linje 32-43
+      // linje 46-63 erstattes af linje 32-43
       // key/name: value from state
       name: name,
       image: image,
@@ -118,13 +118,11 @@ export default function UploadSite() {
                   <Form.Label>Wind Farm Image</Form.Label>
                 </Col>
                 <Col>
-                  <Form.Label>
-                    <Form.Control
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                    />
-                  </Form.Label>
+                  <Form.Control
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                  />
                 </Col>
               </Row>
               <Row className="mb-3">
@@ -159,7 +157,7 @@ export default function UploadSite() {
               </Row>
               <Row>
                 <Col>
-                  <Button type="submit ">Save</Button>
+                  <Button type="submit ">Upload</Button>
                 </Col>
               </Row>
             </Form.Group>
