@@ -22,16 +22,16 @@ export default function Site({ site }) {
             {site.country} | {site.developmentStatus}
           </Card.Subtitle>
           <Card.Subtitle className="mb-2">
-            Total Capacity: {site.installedCapacity} MW
+            Installed Capacity: {site.installedCapacity} MW
           </Card.Subtitle>
-          {site.turbine.map((turbine) => (
+          {/* {site.turbine.map((turbine) => (
             <>
               <Card.Subtitle className="mb-2">
                 Turbine: {turbine.turbineModel}
               </Card.Subtitle>
               <Card.Subtitle className="mb-2">Number:</Card.Subtitle>
             </>
-          ))}
+          ))} */}
         </Card.Body>
       </Card>
     </Col>

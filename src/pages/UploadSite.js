@@ -5,69 +5,69 @@ import imgPlaceholder from "../img/img-placeholder.jpg";
 
 export default function UploadSite() {
   const navigate = useNavigate();
-  // const [formData, setFormData] = useState({
-  //   name: "", // text string
-  //   image: "",
-  //   country: "",
-  //   developmentStatus: "",
-  //   installedCapacity: 0, //angives tal sådan?
-  //   projectStart:[],
-  //   evt. angive {projectStartYear: "", projectStartMonth: "", projectStartEvent: ""}
-  // });
-  const [name, setName] = useState(""); //linje 18-21 erstattes med linje 8-17
+  const [formData, setFormData] = useState({
+    name: "",
+    image: "",
+    country: "",
+    developmentStatus: "",
+    installedCapacity: 0,
+    // projectStart:[],
+    // evt. angive {projectStartYear: "", projectStartMonth: "", projectStartEvent: ""}
+  });
   const [image, setImage] = useState("");
-  const [developmentStatus, setDevelopmentStatus] = useState("");
-  const [country, setCountry] = useState("");
+  // const [name, setName] = useState(""); //linje 18-21 erstattes med linje 8-17
+  // const [image, setImage] = useState("");
+  // const [developmentStatus, setDevelopmentStatus] = useState("");
+  // const [country, setCountry] = useState("");
 
-  // function handleChange(event) {
-  //   const name = event.target.name;
-  //   const type = event.target.type;
-  //   const checked = event.target.checked;
-  //   const value = type === "checkbox" ? checked : event.target.value;
-  //   
-  //   setFormData(prevUpdateData => {
-  //       return {
-  //         ...prevUpdateData,
-  //         [name]: value
-  //       };
-  //     });
-  // }
+  function handleChange(event) {
+    const name = event.target.name;
+    const type = event.target.type;
+    const checked = event.target.checked;
+    const value = type === "checkbox" ? checked : event.target.value;
+
+    setFormData((prevUpdateData) => {
+      return {
+        ...prevUpdateData,
+        [name]: value,
+      };
+    });
+  }
 
   async function uploadSite(event) {
     event.preventDefault();
-    //
-    // const response = await fetch(
-    //   "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json",
-    //   {
-    //     method: "POST",
-    //     body: JSON.stringify(formData),
-    //  }
-    // );
-    //    if (response.ok) {
-    //     navigate("/");
-    //   }
-    // }
-
-    const newSite = {
-      // linje 46-63 erstattes af linje 32-43
-      // key/name: value from state
-      name: name,
-      image: image,
-      developmentStatus: developmentStatus,
-      country: country,
-    };
-
     const response = await fetch(
       "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json",
       {
         method: "POST",
-        body: JSON.stringify(newSite),
+        body: JSON.stringify(formData),
       }
     );
     if (response.ok) {
       navigate("/");
     }
   }
+
+  //   const newSite = {
+  //     // linje 46-63 erstattes af linje 32-43
+  //     // key/name: value from state
+  //     name: name,
+  //     image: image,
+  //     developmentStatus: developmentStatus,
+  //     country: country,
+  //   };
+
+  //   const response = await fetch(
+  //     "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json",
+  //     {
+  //       method: "POST",
+  //       body: JSON.stringify(newSite),
+  //     }
+  //   );
+  //   if (response.ok) {
+  //     navigate("/");
+  //   }
+  // }
 
   /**
    * handleImageChange is called every time the user chooses an image in the file system.
@@ -114,8 +114,11 @@ export default function UploadSite() {
                   <Form.Control
                     type="text"
                     placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={handleChange}
+                    name="name"
+                    value={formData.name}
+                    // value={name}
+                    // onChange={(e) => setName(e.target.value)}
                   />
                 </Col>
               </Row>
@@ -139,8 +142,11 @@ export default function UploadSite() {
                   <Form.Control
                     type="text"
                     placeholder="Country"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    onChange={handleChange}
+                    name="country"
+                    value={formData.country}
+                    // value={country}
+                    // onChange={(e) => setCountry(e.target.value)}
                   />
                 </Col>
               </Row>
@@ -149,16 +155,63 @@ export default function UploadSite() {
                   <Form.Label>Development Status</Form.Label>
                 </Col>
                 <Col>
-                  <Form.Select
-                    onChange={(e) => setDevelopmentStatus(e.target.value)}
-                  >
-                    <option value="" selected disabled>
-                      Select
-                    </option>
-                    <option value={developmentStatus}>Decommission</option>
-                    <option value={developmentStatus}>Commission</option>
-                    <option value={developmentStatus}>Installation</option>
-                  </Form.Select>
+                  {["radio"].map((radioButtons) => (
+                    <div
+                      key={`stackedDevelopementStatus-${radioButtons}`}
+                      className="mb-3"
+                    >
+                      <Form.Check
+                        label="Installation"
+                        type={radioButtons}
+                        id={`stackedDevelopementStatus-${radioButtons}`}
+                        name="developmentStatus"
+                        value="Installation"
+                        // checked={formData.developmentStatus === "Installation"}
+                        onChange={handleChange}
+                      />
+                      <Form.Text muted>Site is under construction</Form.Text>
+                      <Form.Check
+                        label="Commission"
+                        type={radioButtons}
+                        id={`stackedDevelopementStatus-${radioButtons}`}
+                        name="developmentStatus"
+                        value="Commission"
+                        onChange={handleChange}
+                      />
+                      <Form.Text muted>
+                        Site is generating power from every turbine
+                      </Form.Text>
+                      <Form.Check
+                        label="Decommission"
+                        type={radioButtons}
+                        id={`stackedDevelopementStatus-${radioButtons}}`}
+                        name="developmentStatus"
+                        value="Decommission"
+                        onChange={handleChange}
+                      />
+                      <Form.Text muted>
+                        Site has permanently ceased generation
+                      </Form.Text>
+                    </div>
+                  ))}
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Total Installed Capacity</Form.Label>
+                </Col>
+                <Col>
+                  <Form.Control
+                    type="number"
+                    onChange={handleChange}
+                    name="installedCapacity"
+                    value={formData.installedCapacity}
+                    // value={country}
+                    // onChange={(e) => setCountry(e.target.value)}
+                  />
+                  <Form.Text muted>
+                    Type total number of MWs installed
+                  </Form.Text>
                 </Col>
               </Row>
               <Row>
