@@ -11,28 +11,42 @@ export default function UploadSite() {
     country: "",
     developmentStatus: "",
     installedCapacity: 0,
-    // projectStart:[],
-    // evt. angive {projectStartYear: "", projectStartMonth: "", projectStartEvent: ""}
+    projectStart: [
+      { projectStartYear: "", projectStartMonth: "", projectStartEvent: "" }, // opretter fint mit array for projectStart
+    ],
+    
   });
   const [image, setImage] = useState("");
-  // const [name, setName] = useState(""); //linje 18-21 erstattes med linje 8-17
+  // const [projectStart, setProjectStart] = useState("");
+  // const [name, setName] = useState(""); 
   // const [image, setImage] = useState("");
   // const [developmentStatus, setDevelopmentStatus] = useState("");
   // const [country, setCountry] = useState("");
 
-  function handleChange(event) {
+  function handleChange(event) { //rammer ikke mit array for projectStart
     const name = event.target.name;
     const type = event.target.type;
     const checked = event.target.checked;
     const value = type === "checkbox" ? checked : event.target.value;
 
-    setFormData((prevUpdateData) => {
+    setFormData((prevFormData) => {
       return {
-        ...prevUpdateData,
+        ...prevFormData,
         [name]: value,
       };
     });
   }
+
+  // function handleProjectStart(event) {
+  //   const name = event.target.name;
+  //   const value = event.target.value;
+  //   setProjectStart((prevProjectStart) => {
+  //     return {
+  //       ...prevProjectStart,
+  //       [name]: value,
+  //     };
+  //   });
+  // }
 
   async function uploadSite(event) {
     event.preventDefault();
@@ -214,6 +228,30 @@ export default function UploadSite() {
                   </Form.Text>
                 </Col>
               </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Project Start</Form.Label>
+                </Col>
+                <Col>
+                  <Form.Control
+                    className="mb-3"
+                    type="text"
+                    placeholder="Year"
+                    name="projectStartYear"
+                    value={formData.year}
+                    onChange={handleChange}
+                  />
+                  {/* <Form.Control
+                    className="mb-3"
+                    type="text"
+                    placeholder="Month"
+                    name="projectStartMonth"
+                    value={formData.month}
+                    onChange={handleChange}
+                  /> */}
+                </Col>
+              </Row>
+
               <Row>
                 <Col>
                   <Button type="submit ">Upload</Button>
