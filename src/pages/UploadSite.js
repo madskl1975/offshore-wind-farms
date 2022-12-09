@@ -11,9 +11,8 @@ export default function UploadSite() {
   //   country: "",
   //   developmentStatus: "",
   //   installedCapacity: 0, //angives tal sådan?
-  //   projectStartYear: "",
-  //   projectStartMonth: "",
-  //   projectStartEvent: "" //angives projectstart-array sådan eller hvordan med nested data?
+  //   projectStart:[],
+  //   evt. angive {projectStartYear: "", projectStartMonth: "", projectStartEvent: ""}
   // });
   const [name, setName] = useState(""); //linje 18-21 erstattes med linje 8-17
   const [image, setImage] = useState("");
@@ -25,16 +24,23 @@ export default function UploadSite() {
   //   const type = event.target.type;
   //   const checked = event.target.checked;
   //   const value = type === "checkbox" ? checked : event.target.value;
+  //   
+  //   setFormData(prevUpdateData => {
+  //       return {
+  //         ...prevUpdateData,
+  //         [name]: value
+  //       };
+  //     });
   // }
 
   async function uploadSite(event) {
     event.preventDefault();
-    // const data = formData
+    //
     // const response = await fetch(
     //   "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json",
     //   {
     //     method: "POST",
-    //     body: JSON.stringify(data),
+    //     body: JSON.stringify(formData),
     //  }
     // );
     //    if (response.ok) {
@@ -69,7 +75,7 @@ export default function UploadSite() {
    */
   function handleImageChange(event) {
     const file = event.target.files[0];
-    if (file.size < 500000) {
+    if (file.size < 512000) {
       // image file size must be below 0,5MB
       const reader = new FileReader();
       reader.onload = (event) => {
@@ -78,13 +84,13 @@ export default function UploadSite() {
       reader.readAsDataURL(file);
     } else {
       // if not below 0.5MB display an error message using the errorMessage state
-      console.log("The image file is too big!"); //NB! Tilføj alert her
+      alert("The image file is too big! Max image file size is 500 kb");
     }
   }
 
   return (
     // return tilpasses props i formData, setFormData.
-    // Spm: hvad med nested {projectStart..}?
+    // Spm: hvad med nested {projectStart..}? value={FormData.turbine[0].turbinemodel}
     // og gentagelse inputfelter for projectStart <input>, som hedder Form.Control i Reactbootstrap?
     <>
       <Container className="d-flex justify-content-center">
