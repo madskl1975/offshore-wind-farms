@@ -29,7 +29,9 @@ export default function Site({ site }) {
               <Card.Subtitle className="mb-2">
                 Turbine: {turbine.turbineModel}
               </Card.Subtitle>
-              <Card.Subtitle className="mb-2">Number:</Card.Subtitle>
+              <Card.Subtitle className="mb-2">
+                Number:
+              </Card.Subtitle>
             </>
           ))} */}
         </Card.Body>

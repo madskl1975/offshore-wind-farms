@@ -14,16 +14,15 @@ export default function UploadSite() {
     projectStart: [
       { projectStartYear: "", projectStartMonth: "", projectStartEvent: "" }, // opretter fint mit array for projectStart
     ],
-    
   });
   const [image, setImage] = useState("");
   // const [projectStart, setProjectStart] = useState("");
-  // const [name, setName] = useState(""); 
-  // const [image, setImage] = useState("");
+  // const [name, setName] = useState("");
   // const [developmentStatus, setDevelopmentStatus] = useState("");
   // const [country, setCountry] = useState("");
 
-  function handleChange(event) { //rammer ikke mit array for projectStart
+  function handleChange(event) {
+    //rammer ikke mit array for projectStart
     const name = event.target.name;
     const type = event.target.type;
     const checked = event.target.checked;
@@ -103,9 +102,7 @@ export default function UploadSite() {
   }
 
   return (
-    // return tilpasses props i formData, setFormData.
-    // Spm: hvad med nested {projectStart..}? value={FormData.turbine[0].turbinemodel}
-    // og gentagelse inputfelter for projectStart <input>, som hedder Form.Control i Reactbootstrap?
+    // value={FormData.turbine[0].turbinemodel}
     <>
       <Container className="d-flex justify-content-center">
         <Card style={{ width: "60%" }} className="m-5">
@@ -241,14 +238,6 @@ export default function UploadSite() {
                     value={formData.year}
                     onChange={handleChange}
                   />
-                  {/* <Form.Control
-                    className="mb-3"
-                    type="text"
-                    placeholder="Month"
-                    name="projectStartMonth"
-                    value={formData.month}
-                    onChange={handleChange}
-                  /> */}
                 </Col>
               </Row>
 

@@ -108,20 +108,19 @@ export default function SitePage() {
           </Tab>
           <Tab eventKey="Timeline" title="Timeline">
             <Card.Text className="mb-0">
-              {site.projectStart && (
-                <Row className="bg-primary text-dark bg-opacity-10">
-                  <Col className="py-1 border border-white">Project Start</Col>{" "}
-                  {/*hvis ingen data, hvordan display none? */}
-                  <Col className="py-1 border border-white">
-                    {site.projectStartYear}
-                    {site.projectStartMonth && ", "}
-                    {site.projectStartMonth}
-                    {site.projectStartMonth && " - "}
-                    {site.projectStartEvent}
-                    {/*hvis tom inkl. skilletegn, hvordan display none? */}
-                  </Col>
-                </Row>
-              )}
+              {/* {site.projectStart && (*/}
+              {/* skal testes, virker ikke  */}
+              <Row className="bg-primary text-dark bg-opacity-10">
+                <Col className="py-1 border border-white">Project Start</Col>{" "}
+                <Col className="py-1 border border-white">
+                  {site.projectStartYear}
+                  {/* {site.projectStartMonth && ", "} */}
+                  {site.projectStartMonth}
+                  {/* {site.projectStartEvent && " - "} */}
+                  {site.projectStartEvent}
+                </Col>
+              </Row>
+              {/* )} */}
             </Card.Text>
             <Card.Text className="mb-0">
               <Row className="bg-primary text-dark bg-opacity-10">
@@ -130,7 +129,7 @@ export default function SitePage() {
                 </Col>
                 <Col className="py-1 border border-white">
                   {site.installationStartYear}
-                  {", "}
+                  { ", "}
                   {site.installationStartMonth}
                   {" - "}
                   {site.installationStartEvent}
@@ -143,7 +142,8 @@ export default function SitePage() {
                   First Power Generation
                 </Col>
                 <Col className="py-1 border border-white">
-                  {site.firstPowerGenerationYear},{" "}
+                  {site.firstPowerGenerationYear}
+                  {site.firsPowerGenerationMonth ?? ", "}
                   {site.firstPowerGenerationMonth}
                 </Col>
               </Row>
@@ -153,7 +153,7 @@ export default function SitePage() {
                 <Col className="py-1 border border-white">Commission</Col>
                 <Col className="py-1 border border-white">
                   {site.commisionYear}
-                  {", "}
+                  {site.commissionMonth ?? ", "}
                   {site.commisionMonth}
                 </Col>
               </Row>
@@ -162,9 +162,9 @@ export default function SitePage() {
               <Row className="bg-primary text-dark bg-opacity-10">
                 <Col className="py-1 border border-white">Decommission</Col>
                 <Col className="py-1 border border-white">
-                  {site.DecommisionYear}
-                  {", "}
-                  {site.DecommisionMonth}
+                  {site.decommisionYear}
+                  {site.decommissionMonth && ", "}
+                  {site.decommisionMonth}
                 </Col>
               </Row>
             </Card.Text>

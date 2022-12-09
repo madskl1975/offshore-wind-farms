@@ -8,14 +8,14 @@ export default function UpdateSite() {
   const url = `https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms/${params.id}.json`;
   const navigate = useNavigate();
   // const [updateData, setUpdateData] = useState({
-  //   name: "", // text string
+  //   name: "",
   //   image: "",
   //   country: "",
   //   developmentStatus: "",
-  //   installedCapacity: 0, //angives tal sådan?
-  //   projectStartYear: "",
-  //   projectStartMonth: "",
-  //   projectStartEvent: "" //angives projectstart-array sådan eller hvordan med nested data?
+  //   installedCapacity: 0,
+  //   projectStart: [
+  //     { projectStartYear: "", projectStartMonth: "", projectStartEvent: "" }, // opretter fint mit array for projectStart
+  //   ],
   // });
 
   const [name, setName] = useState(""); // linje 20-24 erstattes af linje 9-18
