@@ -15,7 +15,7 @@ export default function UploadSite() {
       { projectStartYear: "", projectStartMonth: "", projectStartEvent: "" }, // opretter fint mit array for projectStart
     ],
   });
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
   // const [projectStart, setProjectStart] = useState("");
   // const [name, setName] = useState("");
   // const [developmentStatus, setDevelopmentStatus] = useState("");
@@ -131,7 +131,7 @@ export default function UploadSite() {
         <Card style={{ width: "60%" }} className="m-5">
           <Card.Img
             variant="top"
-            src={image}
+            src={formData.image}
             alt="Choose"
             onError={(event) => (event.target.src = imgPlaceholder)}
           />
@@ -250,7 +250,7 @@ export default function UploadSite() {
               </Row>
               <Row className="mb-3">
                 <Col>
-                  <Form.Label>Project Start</Form.Label>
+                  <Form.Label>Project Start Year</Form.Label>
                 </Col>
                 <Col>
                   <Form.Control
@@ -258,7 +258,7 @@ export default function UploadSite() {
                     type="text"
                     placeholder="Year"
                     name="projectStartYear"
-                    value={formData.year}
+                    value={formData.projectStart}
                     onChange={handleProjectStart}
                   />
                 </Col>
