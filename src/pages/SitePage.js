@@ -18,6 +18,8 @@ export default function SitePage() {
     getSite();
   }, [url]); // <--- "[]" VERY IMPORTANT!!!
 
+  
+
   function showDeleteDialog() {
     const shouldDelete = window.confirm(
       `Do you want to delete "${site.name}"?`
@@ -37,6 +39,8 @@ export default function SitePage() {
   function showUpdate() {
     navigate(`/update/${params.id}`);
   }
+
+  
 
   return (
     <Col className="d-flex justify-content-center align-items-center">
@@ -129,7 +133,7 @@ export default function SitePage() {
                 </Col>
                 <Col className="py-1 border border-white">
                   {site.installationStartYear}
-                  { ", "}
+                  {", "}
                   {site.installationStartMonth}
                   {" - "}
                   {site.installationStartEvent}
@@ -143,7 +147,7 @@ export default function SitePage() {
                 </Col>
                 <Col className="py-1 border border-white">
                   {site.firstPowerGenerationYear}
-                  {site.firsPowerGenerationMonth ?? ", "}
+                  {", "}
                   {site.firstPowerGenerationMonth}
                 </Col>
               </Row>
@@ -159,14 +163,16 @@ export default function SitePage() {
               </Row>
             </Card.Text>
             <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">Decommission</Col>
-                <Col className="py-1 border border-white">
-                  {site.decommisionYear}
-                  {site.decommissionMonth && ", "}
-                  {site.decommisionMonth}
-                </Col>
-              </Row>
+              {
+                <Row className="bg-primary text-dark bg-opacity-10">
+                  <Col className="py-1 border border-white">Decommission</Col>
+                  <Col className="py-1 border border-white">
+                    {site.decommisionYear}
+                    {(site.decommissionMonth &&= ", ")}
+                    {site.decommisionMonth}
+                  </Col>
+                </Row>
+              }
             </Card.Text>
           </Tab>
           <Tab

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function Site({ site }) {
   const navigate = useNavigate();
   // site is a prop containing site data, ex:
-  // {id: "...", image: "...", mail: "...", name: "...", phone: "...", title: "..."}
+  // {id: "...", name: "..." image: "...", developmentStatus: "...", installedCapacity: "..."}
 
   function handleClick() {
     navigate(`site/${site.id}`);
@@ -16,7 +16,7 @@ export default function Site({ site }) {
         <Card.Img variant="top" src={site.image} alt={site.name} />
         <Card.Body>
           <Card.Title>
-            <h3>{site.name}</h3>
+            <h4>{site.name}</h4>
           </Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             {site.country} | {site.developmentStatus}

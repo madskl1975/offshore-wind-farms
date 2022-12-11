@@ -36,16 +36,19 @@ export default function UploadSite() {
     });
   }
 
-  // function handleProjectStart(event) {
-  //   const name = event.target.name;
-  //   const value = event.target.value;
-  //   setProjectStart((prevProjectStart) => {
-  //     return {
-  //       ...prevProjectStart,
-  //       [name]: value,
-  //     };
-  //   });
-  // }
+  function handleProjectStart(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    setFormData((prevFormData) => {
+      const projectStartArray = formData.projectStart;
+      projectStartArray[0][name] = value;
+
+      return {
+        ...prevFormData,
+        projectStart: projectStartArray,
+      };
+    });
+  }
 
   async function uploadSite(event) {
     event.preventDefault();
@@ -82,17 +85,18 @@ export default function UploadSite() {
   //   }
   // }
 
-  /**
-   * handleImageChange is called every time the user chooses an image in the file system.
-   * The event is fired by the input file field in the form
-   */
   function handleImageChange(event) {
     const file = event.target.files[0];
     if (file.size < 512000) {
       // image file size must be below 0,5MB
       const reader = new FileReader();
       reader.onload = (event) => {
-        setImage(event.target.result);
+        setFormData(prevFormData => {
+          return {
+          ...prevFormData,
+          image: event.target.result
+          };
+        });
       };
       reader.readAsDataURL(file);
     } else {
@@ -100,6 +104,25 @@ export default function UploadSite() {
       alert("The image file is too big! Max image file size is 500 kb");
     }
   }
+
+  // /**
+  //  * handleImageChange is called every time the user chooses an image in the file system.
+  //  * The event is fired by the input file field in the form
+  //  */
+  // function handleImageChange(event) {
+  //   const file = event.target.files[0];
+  //   if (file.size < 512000) {
+  //     // image file size must be below 0,5MB
+  //     const reader = new FileReader();
+  //     reader.onload = (event) => {
+  //       setImage(event.target.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   } else {
+  //     // if not below 0.5MB display an error message using the errorMessage state
+  //     alert("The image file is too big! Max image file size is 500 kb");
+  //   }
+  // }
 
   return (
     // value={FormData.turbine[0].turbinemodel}
@@ -201,7 +224,7 @@ export default function UploadSite() {
                         onChange={handleChange}
                       />
                       <Form.Text muted>
-                        Site has permanently ceased generation
+                        Site has permanently ceased power generation
                       </Form.Text>
                     </div>
                   ))}
@@ -236,7 +259,7 @@ export default function UploadSite() {
                     placeholder="Year"
                     name="projectStartYear"
                     value={formData.year}
-                    onChange={handleChange}
+                    onChange={handleProjectStart}
                   />
                 </Col>
               </Row>

@@ -7,27 +7,32 @@ export default function HomePage() {
   const [sites, setSites] = useState([]);
   // sites: name of the state, state to handle the data
   // setSites: name of the function to set the state
-  const [searchValue, setSearchValue] = useState("");
-  const [showCommissionSites, setShowCommissionSites] = useState(true);
+  const [searchValue, setSearchValue] = useState(""); // string (text)
+  const [showCommissionSites, setShowCommissionSites] = useState(true); // boolean (true eller false)
   const [showInstallationSites, setShowInstallationSites] = useState(true);
   const [sortBy, setSortBy] = useState("name"); // name = default sortering
 
-  //the side effect - fetch sites
   useEffect(() => {
     async function getData() {
       const response = await fetch(
         "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json"
       );
       const data = await response.json();
-      const sites = Object.keys(data).map((key) => ({ id: key, ...data[key] })); // from object to array
+      const sites = Object.keys(data).map((key) => ({ id: key, ...data[key] })); 
       setSites(sites);
     }
     getData();
   }, []); // <--- "[]" VERY IMPORTANT!!!
 
-  let sitesToDisplay = [...sites]; // copy sites array
+  // useEffect er side effect, der fetcher data.
+  // Funktionen er sat til async, fordi kaldet fra clientside til REST API'et (serverside)
+  // kan have forsinkelse inden data returners til clienten.
+  // JS er default synkron, så derfor async funktion og await fetch og await response
+  // Data modstages i JSON og Object.keys(data).map mapper JSON data og laver objekterne om til et array
 
-  if (!showCommissionSites) {
+  let sitesToDisplay = [...sites]; // sitesToDisplay er en kopi af sites array
+
+  if (!showCommissionSites) { //
     sitesToDisplay = sitesToDisplay.filter(
       (site) => site.developmentStatus === "Installation"
     );
@@ -43,9 +48,18 @@ export default function HomePage() {
     );
   }
 
+  // .filter er en metode, der laver en skyggekopi kun med de elementer, som funktionen lader være tilbage i arrayet
+  // .filter er indsat i if conditional statements, hvilket gør at sitesToDisplay tilpases 
+  // efter brugerens valg af checkbox-filteringer og input i søgefeltet
+  // De 2 første if-statements (checkbox) bruges arrowfunction, som er en hurtig måde at skrive alm funktioner på
+  // I de 3 if statement (søgning) bruges to.LowerCase, hvilket gør at brugerens input og data kan sammenlignes, 
+  // fordi de laves om til småbogstaver 
+
   sitesToDisplay.sort((site1, site2) =>
     site1[sortBy].localeCompare(site2[sortBy])
   );
+
+  // .sort er en metode til sortering af elementer i et array
 
   return (
     <>
@@ -88,8 +102,6 @@ export default function HomePage() {
           >
             <option value="name">Sort by name</option>
             <option value="country">Sort by country</option>
-            <option value="installedCapacity">Sort by capacity</option> virker
-            ikke
           </FormSelect>
         </FormGroup>
       </Form>
