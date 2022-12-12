@@ -168,7 +168,7 @@ export default function SitePage() {
                   <Col className="py-1 border border-white">Decommission</Col>
                   <Col className="py-1 border border-white">
                     {site.decommisionYear}
-                    {(site.decommissionMonth &&= ", ")}
+                    {", "}
                     {site.decommisionMonth}
                   </Col>
                 </Row>

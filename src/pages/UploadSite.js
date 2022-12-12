@@ -518,7 +518,7 @@ export default function UploadSite() {
                   <Col className="mb-2">
                     <Form.Control
                       type="number"
-                      name="numberOfTurbines"
+                      name="ratedPowerPerTurbine"
                       value={formData.turbine[0].ratedPowerPerTurbine}
                       onChange={handleTurbine}
                     />
@@ -543,7 +543,7 @@ export default function UploadSite() {
                       <option value="Gravity-based">Gravity-based</option>
                       <option value="Jackets">Jackets</option>
                       <option value="Monopiles">Monopiles</option>
-                      <option value="Tripods">REpower 5M</option>
+                      <option value="Tripods">Tripods</option>
                     </Form.Select>
                   </Col>
                   <Col className="mb-2">
@@ -578,7 +578,7 @@ export default function UploadSite() {
                         Principle
                       </option>
                       <option value="Piled">Piled</option>
-                      <option value="Weight">Steel</option>
+                      <option value="Weight">Weight</option>
                     </Form.Select>
                   </Col>
                 </Col>

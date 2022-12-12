@@ -3,11 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Card, Row, Col, Form, Button, Container } from "react-bootstrap";
 import imgPlaceholder from "../img/img-placeholder.jpg";
 
-export default function UploadSite() {
+export default function UpdateSite() {
   const params = useParams();
   const url = `https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms/${params.id}.json`;
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [updateData, setUpdateData] = useState({
     name: "",
     image: "",
     developmentStatus: "",
@@ -49,10 +49,7 @@ export default function UploadSite() {
     async function getSite() {
       const response = await fetch(url); // read one user from firebase
       const site = await response.json();
-      setFormData(site); // virker ikke, hvad skal jeg erstatte setName osv med?
-      // setName(site.name);
-      // setCountry(site.country);
-      // setImage(site.image);
+      setUpdateData(site);
     }
     getSite();
   }, [url]); // <--- "[]" VERY IMPORTANT!!!
@@ -63,9 +60,9 @@ export default function UploadSite() {
     const checked = event.target.checked;
     const value = type === "checkbox" ? checked : event.target.value;
 
-    setFormData((prevFormData) => {
+    setUpdateData((prevUpdateData) => {
       return {
-        ...prevFormData,
+        ...prevUpdateData,
         [name]: value,
       };
     });
@@ -74,12 +71,12 @@ export default function UploadSite() {
   function handleProjectStart(event) {
     const name = event.target.name;
     const value = event.target.value;
-    setFormData((prevFormData) => {
-      const projectStartArray = formData.projectStart;
+    setUpdateData((prevUpdateData) => {
+      const projectStartArray = updateData.projectStart;
       projectStartArray[0][name] = value;
 
       return {
-        ...prevFormData,
+        ...prevUpdateData,
         projectStart: projectStartArray,
       };
     });
@@ -88,30 +85,61 @@ export default function UploadSite() {
   function handleTurbine(event) {
     const name = event.target.name;
     const value = event.target.value;
-    setFormData((prevFormData) => {
-      const turbineArray = formData.turbine;
+    setUpdateData((prevUpdateData) => {
+      const turbineArray = updateData.turbine;
       turbineArray[0][name] = value;
 
       return {
-        ...prevFormData,
+        ...prevUpdateData,
         turbine: turbineArray,
       };
     });
   }
 
-  async function uploadSite(event) {
+  async function updateSite(event) {
     event.preventDefault();
-    const response = await fetch(
-      "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json",
-      {
-        method: "PUT",
-        body: JSON.stringify(formData),
-      }
-    );
+    const siteToUpdate = updateData () // hvordan jeg putter key/value from state ind her?
+    const response = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(siteToUpdate),
+    });
     if (response.ok) {
       navigate("/");
     }
   }
+
+  // async function updateSite(siteToUpdate) {
+  //   siteToUpdate.uid = updateData.uid;
+  //   const response = await fetch(url, {
+  //     method: "PUT",
+  //     body: JSON.stringify(siteToUpdate),
+  //   });
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     console.log("Site updated: ", data);
+  //     navigate("/");
+  //   } else {
+  //     alert("Sorry, something went wrong");
+  //   }
+  // }
+
+  //   async function updateSite(event) {
+  //     event.preventDefault();
+  //     const siteToUpdate = {
+  //       // key/name: value from state
+  //       name: name,
+  //       country: country,
+  //       image: image,
+  //     };
+
+  //     const response = await fetch(url, {
+  //       method: "PUT",
+  //       body: JSON.stringify(siteToUpdate),
+  //     });
+  //     if (response.ok) {
+  //       navigate("/");
+  //     }
+  //   }
 
   function handleImageChange(event) {
     const file = event.target.files[0];
@@ -119,9 +147,9 @@ export default function UploadSite() {
       // image file size must be below 0,5MB
       const reader = new FileReader();
       reader.onload = (event) => {
-        setFormData((prevFormData) => {
+        setUpdateData((prevUpdateData) => {
           return {
-            ...prevFormData,
+            ...prevUpdateData,
             image: event.target.result,
           };
         });
@@ -139,14 +167,14 @@ export default function UploadSite() {
         <Card style={{ width: "60%" }} className="m-5">
           <Card.Img
             variant="top"
-            src={formData.image}
+            src={updateData.image}
             alt="Choose"
             onError={(event) => (event.target.src = imgPlaceholder)}
           />
           <Card.Title className="mb-3 p-3">
-            <h1>Update "{formData.name}"</h1>
+            <h1>Update "{updateData.name}"</h1>
           </Card.Title>
-          <Form onSubmit={uploadSite}>
+          <Form onSubmit={updateSite}>
             <Form.Group className="p-3">
               <Row className="mb-3">
                 <Col>
@@ -157,7 +185,7 @@ export default function UploadSite() {
                     type="text"
                     placeholder="Name"
                     name="name"
-                    value={formData.name}
+                    value={updateData.name}
                     onChange={handleChange}
                     // value={name}
                     // onChange={(e) => setName(e.target.value)}
@@ -185,7 +213,7 @@ export default function UploadSite() {
                     type="text"
                     placeholder="Country"
                     name="country"
-                    value={formData.country}
+                    value={updateData.country}
                     onChange={handleChange}
                   />
                 </Col>
@@ -199,7 +227,7 @@ export default function UploadSite() {
                     type="text"
                     placeholder="Sea Name"
                     name="seaName"
-                    value={formData.seaName}
+                    value={updateData.seaName}
                     onChange={handleChange}
                   />
                 </Col>
@@ -220,7 +248,7 @@ export default function UploadSite() {
                         id={`stackedDevelopementStatus-${radioButtons}`}
                         name="developmentStatus"
                         value="Installation"
-                        // checked={formData.developmentStatus === "Installation"}
+                        // checked={updateData.developmentStatus === "Installation"}
                         onChange={handleChange}
                       />
                       <Form.Text muted>Site is under construction</Form.Text>
@@ -258,7 +286,7 @@ export default function UploadSite() {
                   <Form.Control
                     type="number"
                     name="areaOfWindfarm"
-                    value={formData.areaOfWindfarm}
+                    value={updateData.areaOfWindfarm}
                     onChange={handleChange}
                   />
                   <Form.Text muted>Type km2 area</Form.Text>
@@ -273,7 +301,7 @@ export default function UploadSite() {
                     <Form.Control
                       type="number"
                       name="distanceFromShoreMin"
-                      value={formData.distanceFromShoreMin}
+                      value={updateData.distanceFromShoreMin}
                       onChange={handleChange}
                     />
                     <Form.Text muted>Type minimum km from shore</Form.Text>
@@ -282,7 +310,7 @@ export default function UploadSite() {
                     <Form.Control
                       type="number"
                       name="distanceFromShoreMax"
-                      value={formData.distanceFromShoreMax}
+                      value={updateData.distanceFromShoreMax}
                       onChange={handleChange}
                     />
                     <Form.Text muted>Type maximum km from shore</Form.Text>
@@ -298,7 +326,7 @@ export default function UploadSite() {
                     <Form.Control
                       type="number"
                       name="waterDepthMin"
-                      value={formData.waterDepthMin}
+                      value={updateData.waterDepthMin}
                       onChange={handleChange}
                     />
                     <Form.Text muted>Type minimum m water depth</Form.Text>
@@ -307,7 +335,7 @@ export default function UploadSite() {
                     <Form.Control
                       type="number"
                       name="waterDepthMax"
-                      value={formData.waterDepthMax}
+                      value={updateData.waterDepthMax}
                       onChange={handleChange}
                     />
                     <Form.Text muted>Type maximum m water depth</Form.Text>
@@ -322,7 +350,7 @@ export default function UploadSite() {
                   <Form.Control
                     type="number"
                     name="installedCapacity"
-                    value={formData.installedCapacity}
+                    value={updateData.installedCapacity}
                     onChange={handleChange}
                   />
                   <Form.Text muted>Type total MWs installed</Form.Text>
@@ -338,7 +366,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Year"
                       name="projectStartYear"
-                      value={formData.projectStart[0].year}
+                      value={updateData.projectStart[0].year}
                       onChange={handleProjectStart}
                     />
                   </Col>
@@ -347,7 +375,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Month"
                       name="projectStartMonth"
-                      value={formData.projectStart[0].month}
+                      value={updateData.projectStart[0].month}
                       onChange={handleProjectStart}
                     />
                   </Col>
@@ -356,7 +384,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Event"
                       name="projectStartEvent"
-                      value={formData.projectStart[0].event}
+                      value={updateData.projectStart[0].event}
                       onChange={handleProjectStart}
                     />
                   </Col>
@@ -372,7 +400,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Year"
                       name="installationStartYear"
-                      value={formData.installationStartYear}
+                      value={updateData.installationStartYear}
                       onChange={handleChange}
                     />
                   </Col>
@@ -381,7 +409,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Month"
                       name="installationStartMonth"
-                      value={formData.installationStartMonth}
+                      value={updateData.installationStartMonth}
                       onChange={handleChange}
                     />
                   </Col>
@@ -390,7 +418,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Event"
                       name="installationStartEvent"
-                      value={formData.installationStartEvent}
+                      value={updateData.installationStartEvent}
                       onChange={handleChange}
                     />
                   </Col>
@@ -406,7 +434,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Year"
                       name="firstPowerGenerationYear"
-                      value={formData.firstPowerGenerationYear}
+                      value={updateData.firstPowerGenerationYear}
                       onChange={handleChange}
                     />
                   </Col>
@@ -415,7 +443,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Month"
                       name="firstPowerGenerationMonth"
-                      value={formData.firstPowerGenerationMonth}
+                      value={updateData.firstPowerGenerationMonth}
                       onChange={handleChange}
                     />
                   </Col>
@@ -431,7 +459,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Year"
                       name="commisionYear"
-                      value={formData.commisionYear}
+                      value={updateData.commisionYear}
                       onChange={handleChange}
                     />
                   </Col>
@@ -440,7 +468,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Month"
                       name="commisionMonth"
-                      value={formData.commisionMonth}
+                      value={updateData.commisionMonth}
                       onChange={handleChange}
                     />
                   </Col>
@@ -456,7 +484,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Year"
                       name="decommisionYear"
-                      value={formData.decommisionYear}
+                      value={updateData.decommisionYear}
                       onChange={handleChange}
                     />
                   </Col>
@@ -465,7 +493,7 @@ export default function UploadSite() {
                       type="text"
                       placeholder="Month"
                       name="decommisionMonth"
-                      value={formData.decommisionMonth}
+                      value={updateData.decommisionMonth}
                       onChange={handleChange}
                     />
                   </Col>
@@ -479,7 +507,7 @@ export default function UploadSite() {
                   <Col className="mb-2">
                     <Form.Select
                       name="manufacturer"
-                      value={formData.turbine[0].manufacturer}
+                      value={updateData.turbine[0].manufacturer}
                       onChange={handleTurbine}
                     >
                       <option value="" disabled>
@@ -497,7 +525,7 @@ export default function UploadSite() {
                   <Col className="mb-2">
                     <Form.Select
                       name="model"
-                      value={formData.turbine[0].model}
+                      value={updateData.turbine[0].model}
                       onChange={handleTurbine}
                     >
                       <option value="" disabled>
@@ -524,7 +552,7 @@ export default function UploadSite() {
                     <Form.Control
                       type="number"
                       name="numberOfTurbines"
-                      value={formData.turbine[0].numberOfTurbines}
+                      value={updateData.turbine[0].numberOfTurbines}
                       onChange={handleTurbine}
                     />
                     <Form.Text muted>Type number of turbines</Form.Text>
@@ -533,7 +561,7 @@ export default function UploadSite() {
                     <Form.Control
                       type="number"
                       name="numberOfTurbines"
-                      value={formData.turbine[0].ratedPowerPerTurbine}
+                      value={updateData.turbine[0].ratedPowerPerTurbine}
                       onChange={handleTurbine}
                     />
                     <Form.Text muted>Type rated MW per turbine </Form.Text>
@@ -548,7 +576,7 @@ export default function UploadSite() {
                   <Col className="mb-2">
                     <Form.Select
                       name="foundationType"
-                      value={formData.turbine[0].foundationType}
+                      value={updateData.turbine[0].foundationType}
                       onChange={handleTurbine}
                     >
                       <option value="" disabled>
@@ -564,7 +592,7 @@ export default function UploadSite() {
                     <Form.Control
                       type="number"
                       name="foundationNumber"
-                      value={formData.turbine[0].foundationNumber}
+                      value={updateData.turbine[0].foundationNumber}
                       onChange={handleTurbine}
                     />
                     <Form.Text muted>Type number of foundations</Form.Text>
@@ -572,7 +600,7 @@ export default function UploadSite() {
                   <Col className="mb-2">
                     <Form.Select
                       name="foundationMaterial"
-                      value={formData.turbine[0].foundationMaterial}
+                      value={updateData.turbine[0].foundationMaterial}
                       onChange={handleTurbine}
                     >
                       <option value="" disabled>
@@ -585,7 +613,7 @@ export default function UploadSite() {
                   <Col className="mb-2">
                     <Form.Select
                       name="foundationPrinciple"
-                      value={formData.turbine[0].foundationPrinciple}
+                      value={updateData.turbine[0].foundationPrinciple}
                       onChange={handleTurbine}
                     >
                       <option value="" disabled>
@@ -599,7 +627,7 @@ export default function UploadSite() {
               </Row>
               <Row>
                 <Col>
-                  <Button type="submit ">Upload</Button>
+                  <Button type="submit">Update</Button>
                 </Col>
               </Row>
             </Form.Group>
