@@ -24,13 +24,16 @@ export default function Site({ site }) {
           <Card.Subtitle className="mb-2">
             Installed Capacity: {site.installedCapacity} MW
           </Card.Subtitle>
+          {/* The optional chaining (?.) operator accesses an object's property or
+          calls a function. // If the object is undefined or null, it returns
+          undefined instead of throwing an error. */}
           {site.turbine?.map((turbine) => (
             <>
               <Card.Subtitle className="mb-2">
                 Turbine: {turbine.model}
               </Card.Subtitle>
               <Card.Subtitle className="mb-2">
-                Number: {turbine.numberOfTurbines}
+                Number of Turbines: {turbine.numberOfTurbines}
               </Card.Subtitle>
             </>
           ))}

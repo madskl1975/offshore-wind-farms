@@ -262,6 +262,7 @@ export default function UpdateSite() {
                         id={`stackedDevelopementStatus-${radioButtons}`}
                         name="developmentStatus"
                         value="Commission"
+                        checked={updateData.developmentStatus === "Commission"}
                         onChange={handleChange}
                       />
                       <Form.Text muted>
@@ -273,6 +274,9 @@ export default function UpdateSite() {
                         id={`stackedDevelopementStatus-${radioButtons}}`}
                         name="developmentStatus"
                         value="Decommission"
+                        checked={
+                          updateData.developmentStatus === "Decommission"
+                        }
                         onChange={handleChange}
                       />
                       <Form.Text muted>
