@@ -42,11 +42,6 @@ export default function UploadSite() {
       },
     ],
   });
-  // const [image, setImage] = useState("");
-  // const [projectStart, setProjectStart] = useState("");
-  // const [name, setName] = useState("");
-  // const [developmentStatus, setDevelopmentStatus] = useState("");
-  // const [country, setCountry] = useState("");
 
   function handleChange(event) {
     const name = event.target.name;
@@ -104,27 +99,6 @@ export default function UploadSite() {
     }
   }
 
-  //   const newSite = {
-  //     // linje 46-63 erstattes af linje 32-43
-  //     // key/name: value from state
-  //     name: name,
-  //     image: image,
-  //     developmentStatus: developmentStatus,
-  //     country: country,
-  //   };
-
-  //   const response = await fetch(
-  //     "https://offshore-wind-farms-default-rtdb.europe-west1.firebasedatabase.app/offshoreWindFarms.json",
-  //     {
-  //       method: "POST",
-  //       body: JSON.stringify(newSite),
-  //     }
-  //   );
-  //   if (response.ok) {
-  //     navigate("/");
-  //   }
-  // }
-
   function handleImageChange(event) {
     const file = event.target.files[0];
     if (file.size < 512000) {
@@ -145,27 +119,7 @@ export default function UploadSite() {
     }
   }
 
-  // /**
-  //  * handleImageChange is called every time the user chooses an image in the file system.
-  //  * The event is fired by the input file field in the form
-  //  */
-  // function handleImageChange(event) {
-  //   const file = event.target.files[0];
-  //   if (file.size < 512000) {
-  //     // image file size must be below 0,5MB
-  //     const reader = new FileReader();
-  //     reader.onload = (event) => {
-  //       setImage(event.target.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   } else {
-  //     // if not below 0.5MB display an error message using the errorMessage state
-  //     alert("The image file is too big! Max image file size is 500 kb");
-  //   }
-  // }
-
   return (
-    // value={FormData.turbine[0].turbinemodel}
     <>
       <Container className="d-flex justify-content-center">
         <Card style={{ width: "60%" }} className="m-5">
@@ -289,8 +243,8 @@ export default function UploadSite() {
                 <Col>
                   <Form.Control
                     type="number"
-                    name="seaName"
-                    value={formData.seaName}
+                    name="areaOfWindfarm"
+                    value={formData.areaOfWindfarm}
                     onChange={handleChange}
                   />
                   <Form.Text muted>Type km2 area</Form.Text>
@@ -565,7 +519,7 @@ export default function UploadSite() {
                     <Form.Control
                       type="number"
                       name="numberOfTurbines"
-                      value={formData.turbine[0].numberOfTurbines}
+                      value={formData.turbine[0].ratedPowerPerTurbine}
                       onChange={handleTurbine}
                     />
                     <Form.Text muted>Type rated MW per turbine </Form.Text>
