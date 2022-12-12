@@ -18,8 +18,6 @@ export default function SitePage() {
     getSite();
   }, [url]); // <--- "[]" VERY IMPORTANT!!!
 
-  
-
   function showDeleteDialog() {
     const shouldDelete = window.confirm(
       `Do you want to delete "${site.name}"?`
@@ -39,8 +37,6 @@ export default function SitePage() {
   function showUpdate() {
     navigate(`/update/${params.id}`);
   }
-
-  
 
   return (
     <Col className="d-flex justify-content-center align-items-center">
@@ -77,7 +73,7 @@ export default function SitePage() {
               <Row className="bg-primary text-dark bg-opacity-10">
                 <Col className="py-1 border border-white">Area</Col>
                 <Col className="py-1 border border-white">
-                  {site.areaOfWindfarm} km2 {/*HTML for km2 &#13218 */}
+                  {site.areaOfWindfarm} km&sup2;
                 </Col>
               </Row>
             </Card.Text>
@@ -157,7 +153,7 @@ export default function SitePage() {
                 <Col className="py-1 border border-white">Commission</Col>
                 <Col className="py-1 border border-white">
                   {site.commisionYear}
-                  {site.commissionMonth ?? ", "}
+                  {", "}
                   {site.commisionMonth}
                 </Col>
               </Row>
@@ -179,80 +175,81 @@ export default function SitePage() {
             eventKey="Technical Specifications"
             title="Technical Specifications"
           >
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">
-                  Turbine Manufacturer
-                </Col>{" "}
-                <Col className="py-1 border border-white">
-                  {site.turbineManufacturer}
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">Turbine Model</Col>
-                <Col className="py-1 border border-white">
-                  {site.turbineModel}
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">
-                  Number of Turbines
-                </Col>
-                <Col className="py-1 border border-white">
-                  {site.numberOfTurbines}
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">Rated Power</Col>
-                <Col className="py-1 border border-white">
-                  {site.ratedPowerPerTurbine}
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">Foundation</Col>
-                <Col className="py-1 border border-white">
-                  {site.foundationType}
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">
-                  Number of Foundations
-                </Col>
-                <Col className="py-1 border border-white">
-                  {site.foundationNumber}
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">
-                  Foundation Material
-                </Col>
-                <Col className="py-1 border border-white">
-                  {site.foundationMaterial}
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">
-                  Foundation Principle
-                </Col>
-                <Col className="py-1 border border-white">
-                  {site.foundationPrinciple}
-                </Col>
-              </Row>
-            </Card.Text>
+            {site.turbine?.map((turbine) => (
+              <>
+                <Card.Text className="mb-0">
+                  <Row className="bg-primary text-dark bg-opacity-10">
+                    <Col className="py-1 border border-white">
+                      Turbine Manufacturer
+                    </Col>{" "}
+                    <Col className="py-1 border border-white">
+                      {turbine.manufacturer}
+                    </Col>
+                  </Row>
+                </Card.Text>
+
+                <Card.Text className="mb-0">
+                  <Row className="bg-primary text-dark bg-opacity-10">
+                    <Col className="py-1 border border-white">
+                      Turbine Model
+                    </Col>
+                    <Col className="py-1 border border-white">
+                      {turbine.model}
+                    </Col>
+                  </Row>
+                </Card.Text>
+                <Card.Text className="mb-0">
+                  <Row className="bg-primary text-dark bg-opacity-10">
+                    <Col className="py-1 border border-white">
+                      Number of Turbines
+                    </Col>
+                    <Col className="py-1 border border-white">
+                      {turbine.numberOfTurbines}
+                    </Col>
+                  </Row>
+                </Card.Text>
+                <Card.Text className="mb-0">
+                  <Row className="bg-primary text-dark bg-opacity-10">
+                    <Col className="py-1 border border-white">
+                      Rated Power per Turbine
+                    </Col>
+                    <Col className="py-1 border border-white">
+                      {turbine.ratedPowerPerTurbine} MW
+                    </Col>
+                  </Row>
+                </Card.Text>
+                <Card.Text className="mb-0">
+                  <Row className="bg-primary text-dark bg-opacity-10">
+                    <Col className="py-1 border border-white">Foundations</Col>
+                    <Col className="py-1 border border-white">
+                      {turbine.foundationNumber} 
+                      {" "}
+                      {turbine.foundationType}
+                    </Col>
+                  </Row>
+                </Card.Text>
+                <Card.Text className="mb-0">
+                  <Row className="bg-primary text-dark bg-opacity-10">
+                    <Col className="py-1 border border-white">
+                      Foundation Material
+                    </Col>
+                    <Col className="py-1 border border-white">
+                      {turbine.foundationMaterial}
+                    </Col>
+                  </Row>
+                </Card.Text>
+                <Card.Text className="mb-0">
+                  <Row className="bg-primary text-dark bg-opacity-10">
+                    <Col className="py-1 border border-white">
+                      Foundation Principle
+                    </Col>
+                    <Col className="py-1 border border-white">
+                      {turbine.foundationPrinciple}
+                    </Col>
+                  </Row>
+                </Card.Text>
+              </>
+            ))}
           </Tab>
         </Tabs>
         <Row>

@@ -47,12 +47,24 @@ export default function UpdateSite() {
 
   useEffect(() => {
     async function getSite() {
-      const response = await fetch(url); // read one user from firebase
+      const response = await fetch(url); // læser et site fra Firebase
       const site = await response.json();
       setUpdateData(site);
     }
     getSite();
   }, [url]); // <--- "[]" VERY IMPORTANT!!!
+
+  async function updateSite(event) {
+    event.preventDefault();
+    const siteToUpdate = updateData; // hvordan jeg putter key/value from state ind her?
+    const response = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(siteToUpdate),
+    });
+    if (response.ok) {
+      navigate("/");
+    }
+  }
 
   function handleChange(event) {
     const name = event.target.name;
@@ -96,17 +108,7 @@ export default function UpdateSite() {
     });
   }
 
-  async function updateSite(event) {
-    event.preventDefault();
-    const siteToUpdate = updateData () // hvordan jeg putter key/value from state ind her?
-    const response = await fetch(url, {
-      method: "PUT",
-      body: JSON.stringify(siteToUpdate),
-    });
-    if (response.ok) {
-      navigate("/");
-    }
-  }
+  
 
   // async function updateSite(siteToUpdate) {
   //   siteToUpdate.uid = updateData.uid;
@@ -248,7 +250,9 @@ export default function UpdateSite() {
                         id={`stackedDevelopementStatus-${radioButtons}`}
                         name="developmentStatus"
                         value="Installation"
-                        // checked={updateData.developmentStatus === "Installation"}
+                        checked={
+                          updateData.developmentStatus === "Installation"
+                        }
                         onChange={handleChange}
                       />
                       <Form.Text muted>Site is under construction</Form.Text>
@@ -366,7 +370,7 @@ export default function UpdateSite() {
                       type="text"
                       placeholder="Year"
                       name="projectStartYear"
-                      value={updateData.projectStart[0].year}
+                      value={updateData.projectStart[0].projectStartYear}
                       onChange={handleProjectStart}
                     />
                   </Col>
@@ -375,7 +379,7 @@ export default function UpdateSite() {
                       type="text"
                       placeholder="Month"
                       name="projectStartMonth"
-                      value={updateData.projectStart[0].month}
+                      value={updateData.projectStart[0].projectStartMonth}
                       onChange={handleProjectStart}
                     />
                   </Col>
@@ -384,7 +388,7 @@ export default function UpdateSite() {
                       type="text"
                       placeholder="Event"
                       name="projectStartEvent"
-                      value={updateData.projectStart[0].event}
+                      value={updateData.projectStart[0].projectStartEvent}
                       onChange={handleProjectStart}
                     />
                   </Col>
