@@ -184,7 +184,6 @@ export default function SitePage() {
                 <Col className="py-1 border border-white">
                   Turbine Manufacturer
                 </Col>{" "}
-                {/*hvis ingen data, hvordan display none? */}
                 <Col className="py-1 border border-white">
                   {site.turbineManufacturer}
                 </Col>

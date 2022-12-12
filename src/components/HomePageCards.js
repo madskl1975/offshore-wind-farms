@@ -11,7 +11,7 @@ export default function Site({ site }) {
   }
 
   return (
-    <Col lg={3} md={4} sm={6}>
+    <Col xl={3} lg={4} md={6} sm={12}>
       <Card style={{ width: "18rem" }} className="mb-5" onClick={handleClick}>
         <Card.Img variant="top" src={site.image} alt={site.name} />
         <Card.Body>
@@ -24,7 +24,7 @@ export default function Site({ site }) {
           <Card.Subtitle className="mb-2">
             Installed Capacity: {site.installedCapacity} MW
           </Card.Subtitle>
-          {site.turbine.map((turbine) => (
+          {site.turbine?.map((turbine) => (
             <>
               <Card.Subtitle className="mb-2">
                 Turbine: {turbine.model}

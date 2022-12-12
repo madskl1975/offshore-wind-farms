@@ -8,11 +8,38 @@ export default function UploadSite() {
   const [formData, setFormData] = useState({
     name: "",
     image: "",
-    country: "",
     developmentStatus: "",
+    country: "",
+    seaName: "",
+    areaOfWindfarm: 0,
+    distanceFromShoreMin: 0,
+    distanceFromShoreMax: 0,
+    waterDepthMin: 0,
+    waterDepthMax: 0,
     installedCapacity: 0,
     projectStart: [
-      { projectStartYear: "", projectStartMonth: "", projectStartEvent: "" }, // opretter fint mit array for projectStart
+      { projectStartYear: "", projectStartMonth: "", projectStartEvent: "" },
+    ],
+    installationStartYear: "",
+    installationStartMonth: "",
+    installationStartEvent: "",
+    firstPowerGenerationYear: "",
+    firstPowerGenerationMonth: "",
+    commisionYear: "",
+    commisionMonth: "",
+    decommisionYear: "",
+    decommisionMonth: "",
+    turbine: [
+      {
+        manufacturer: "",
+        model: "",
+        numberOfTurbines: 0,
+        ratedPowerPerTurbine: 0,
+        foundationNumber: 0,
+        foundationType: "",
+        foundationMaterial: "",
+        foundationPrinciple: "",
+      },
     ],
   });
   // const [image, setImage] = useState("");
@@ -22,7 +49,6 @@ export default function UploadSite() {
   // const [country, setCountry] = useState("");
 
   function handleChange(event) {
-    //rammer ikke mit array for projectStart
     const name = event.target.name;
     const type = event.target.type;
     const checked = event.target.checked;
@@ -46,6 +72,20 @@ export default function UploadSite() {
       return {
         ...prevFormData,
         projectStart: projectStartArray,
+      };
+    });
+  }
+
+  function handleTurbine(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    setFormData((prevFormData) => {
+      const turbineArray = formData.turbine;
+      turbineArray[0][name] = value;
+
+      return {
+        ...prevFormData,
+        turbine: turbineArray,
       };
     });
   }
@@ -91,10 +131,10 @@ export default function UploadSite() {
       // image file size must be below 0,5MB
       const reader = new FileReader();
       reader.onload = (event) => {
-        setFormData(prevFormData => {
+        setFormData((prevFormData) => {
           return {
-          ...prevFormData,
-          image: event.target.result
+            ...prevFormData,
+            image: event.target.result,
           };
         });
       };
@@ -148,9 +188,9 @@ export default function UploadSite() {
                   <Form.Control
                     type="text"
                     placeholder="Name"
-                    onChange={handleChange}
                     name="name"
                     value={formData.name}
+                    onChange={handleChange}
                     // value={name}
                     // onChange={(e) => setName(e.target.value)}
                   />
@@ -176,11 +216,23 @@ export default function UploadSite() {
                   <Form.Control
                     type="text"
                     placeholder="Country"
-                    onChange={handleChange}
                     name="country"
                     value={formData.country}
-                    // value={country}
-                    // onChange={(e) => setCountry(e.target.value)}
+                    onChange={handleChange}
+                  />
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Sea Name</Form.Label>
+                </Col>
+                <Col>
+                  <Form.Control
+                    type="text"
+                    placeholder="Sea Name"
+                    name="seaName"
+                    value={formData.seaName}
+                    onChange={handleChange}
                   />
                 </Col>
               </Row>
@@ -232,38 +284,351 @@ export default function UploadSite() {
               </Row>
               <Row className="mb-3">
                 <Col>
+                  <Form.Label>Area of Wind Farm</Form.Label>
+                </Col>
+                <Col>
+                  <Form.Control
+                    type="number"
+                    name="seaName"
+                    value={formData.seaName}
+                    onChange={handleChange}
+                  />
+                  <Form.Text muted>Type km2 area</Form.Text>
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Distance from Shore</Form.Label>
+                </Col>
+                <Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="number"
+                      name="distanceFromShoreMin"
+                      value={formData.distanceFromShoreMin}
+                      onChange={handleChange}
+                    />
+                    <Form.Text muted>Type minimum km from shore</Form.Text>
+                  </Col>
+                  <Col>
+                    <Form.Control
+                      type="number"
+                      name="distanceFromShoreMax"
+                      value={formData.distanceFromShoreMax}
+                      onChange={handleChange}
+                    />
+                    <Form.Text muted>Type maximum km from shore</Form.Text>
+                  </Col>
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Water Depth</Form.Label>
+                </Col>
+                <Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="number"
+                      name="waterDepthMin"
+                      value={formData.waterDepthMin}
+                      onChange={handleChange}
+                    />
+                    <Form.Text muted>Type minimum m water depth</Form.Text>
+                  </Col>
+                  <Col>
+                    <Form.Control
+                      type="number"
+                      name="waterDepthMax"
+                      value={formData.waterDepthMax}
+                      onChange={handleChange}
+                    />
+                    <Form.Text muted>Type maximum m water depth</Form.Text>
+                  </Col>
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
                   <Form.Label>Total Installed Capacity</Form.Label>
                 </Col>
                 <Col>
                   <Form.Control
                     type="number"
-                    onChange={handleChange}
                     name="installedCapacity"
                     value={formData.installedCapacity}
-                    // value={country}
-                    // onChange={(e) => setCountry(e.target.value)}
+                    onChange={handleChange}
                   />
-                  <Form.Text muted>
-                    Type total number of MWs installed
-                  </Form.Text>
+                  <Form.Text muted>Type total MWs installed</Form.Text>
                 </Col>
               </Row>
               <Row className="mb-3">
                 <Col>
-                  <Form.Label>Project Start Year</Form.Label>
+                  <Form.Label>Project Start</Form.Label>
                 </Col>
                 <Col>
-                  <Form.Control
-                    className="mb-3"
-                    type="text"
-                    placeholder="Year"
-                    name="projectStartYear"
-                    value={formData.projectStart}
-                    onChange={handleProjectStart}
-                  />
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Year"
+                      name="projectStartYear"
+                      value={formData.projectStart[0].year}
+                      onChange={handleProjectStart}
+                    />
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Month"
+                      name="projectStartMonth"
+                      value={formData.projectStart[0].month}
+                      onChange={handleProjectStart}
+                    />
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Event"
+                      name="projectStartEvent"
+                      value={formData.projectStart[0].event}
+                      onChange={handleProjectStart}
+                    />
+                  </Col>
                 </Col>
               </Row>
-
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Installation Start</Form.Label>
+                </Col>
+                <Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Year"
+                      name="installationStartYear"
+                      value={formData.installationStartYear}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Month"
+                      name="installationStartMonth"
+                      value={formData.installationStartMonth}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Event"
+                      name="installationStartEvent"
+                      value={formData.installationStartEvent}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>First Power Generation</Form.Label>
+                </Col>
+                <Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Year"
+                      name="firstPowerGenerationYear"
+                      value={formData.firstPowerGenerationYear}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Month"
+                      name="firstPowerGenerationMonth"
+                      value={formData.firstPowerGenerationMonth}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Commission</Form.Label>
+                </Col>
+                <Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Year"
+                      name="commisionYear"
+                      value={formData.commisionYear}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Month"
+                      name="commisionMonth"
+                      value={formData.commisionMonth}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Decommission</Form.Label>
+                </Col>
+                <Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Year"
+                      name="decommisionYear"
+                      value={formData.decommisionYear}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="text"
+                      placeholder="Month"
+                      name="decommisionMonth"
+                      value={formData.decommisionMonth}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Turbine Specifications</Form.Label>
+                </Col>
+                <Col>
+                  <Col className="mb-2">
+                    <Form.Select
+                      name="manufacturer"
+                      value={formData.turbine[0].manufacturer}
+                      onChange={handleTurbine}
+                    >
+                      <option value="" disabled>
+                        Manufacturer
+                      </option>
+                      <option value="Bonus Energy">AREVA Wind</option>
+                      <option value="Bonus Energy">Bonus Energy</option>
+                      <option value="REpower Systems">REpower Systems</option>
+                      <option value="Siemens Gamesa">Siemens Gamesa</option>
+                      <option value="Vestas Wind Systems">
+                        Vestas Wind Systems
+                      </option>
+                    </Form.Select>
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Select
+                      name="model"
+                      value={formData.turbine[0].model}
+                      onChange={handleTurbine}
+                    >
+                      <option value="" disabled>
+                        Model
+                      </option>
+                      <option value="AREVA M5000-116">AREVA M5000-116</option>
+                      <option value="Bonus 450 kW/37">Bonus 450 kW/37</option>
+                      <option value="REpower 5M">REpower 5M</option>
+                      <option value="Siemens SWT-2.3-93">
+                        Siemens SWT-2.3-93
+                      </option>
+                      <option value="Siemens SWT-3.6-107">
+                        Siemens SWT-3.6-120
+                      </option>
+                      <option value="Siemens SWT-3.6-120">
+                        Siemens SWT-3.6-120
+                      </option>
+                      <option value="Vestas V-80-2.0 MW">
+                        Vestas V-80-2.0 MW
+                      </option>
+                    </Form.Select>
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="number"
+                      name="numberOfTurbines"
+                      value={formData.turbine[0].numberOfTurbines}
+                      onChange={handleTurbine}
+                    />
+                    <Form.Text muted>Type number of turbines</Form.Text>
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="number"
+                      name="numberOfTurbines"
+                      value={formData.turbine[0].numberOfTurbines}
+                      onChange={handleTurbine}
+                    />
+                    <Form.Text muted>Type rated MW per turbine </Form.Text>
+                  </Col>
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Foundation Specifications</Form.Label>
+                </Col>
+                <Col>
+                  <Col className="mb-2">
+                    <Form.Select
+                      name="foundationType"
+                      value={formData.turbine[0].foundationType}
+                      onChange={handleTurbine}
+                    >
+                      <option value="" disabled>
+                        Type
+                      </option>
+                      <option value="Gravity-based">Gravity-based</option>
+                      <option value="Jackets">Jackets</option>
+                      <option value="Monopiles">Monopiles</option>
+                      <option value="Tripods">REpower 5M</option>
+                    </Form.Select>
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Control
+                      type="number"
+                      name="foundationNumber"
+                      value={formData.turbine[0].foundationNumber}
+                      onChange={handleTurbine}
+                    />
+                    <Form.Text muted>Type number of foundations</Form.Text>
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Select
+                      name="foundationMaterial"
+                      value={formData.turbine[0].foundationMaterial}
+                      onChange={handleTurbine}
+                    >
+                      <option value="" disabled>
+                        Material
+                      </option>
+                      <option value="Concrete">Concrete</option>
+                      <option value="Steel">Steel</option>
+                    </Form.Select>
+                  </Col>
+                  <Col className="mb-2">
+                    <Form.Select
+                      name="foundationPrinciple"
+                      value={formData.turbine[0].foundationPrinciple}
+                      onChange={handleTurbine}
+                    >
+                      <option value="" disabled>
+                        Principle
+                      </option>
+                      <option value="Piled">Piled</option>
+                      <option value="Weight">Steel</option>
+                    </Form.Select>
+                  </Col>
+                </Col>
+              </Row>
               <Row>
                 <Col>
                   <Button type="submit ">Upload</Button>

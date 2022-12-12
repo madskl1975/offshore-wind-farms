@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Site from "../components/HomePageCards";
 
-import { Row, Form, FormGroup, FormSelect } from "react-bootstrap";
+import { Row, Col, Form, FormGroup, FormSelect, Container } from "react-bootstrap";
 
 export default function HomePage() {
   const [sites, setSites] = useState([]);
@@ -43,8 +43,9 @@ export default function HomePage() {
     );
   }
   if (searchValue) {
-    sitesToDisplay = sitesToDisplay.filter((site) =>
-      site.name.toLowerCase().includes(searchValue.toLowerCase())
+    sitesToDisplay = sitesToDisplay.filter(
+      (site) =>
+        site.name.toLowerCase().includes(searchValue.toLowerCase())
     );
   }
 
@@ -63,53 +64,67 @@ export default function HomePage() {
 
   return (
     <>
-      <header className="p-5 bg-light">
-        <h1 className="fs-1 fw-bold">Offshore Wind Farms</h1>
-        <p className="fs-4">Explore the world's blue energy power plants</p>
-        <a className="btn btn-primary btn-lg" href="/upload" role="button">
-          Upload Offshore Wind Farm
-        </a>
-      </header>
-      <Form className="d-flex flex-wrap align-items-center p-4 mx-5">
-        <FormGroup>
-          <Form.Control
-            type="search"
-            placeholder="Search by name"
-            onChange={(e) => setSearchValue(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Form.Check
-            type="checkbox"
-            checked={showCommissionSites}
-            onChange={() => setShowCommissionSites(!showCommissionSites)}
-            label="Commission"
-            className="mx-4"
-          />
-        </FormGroup>
-        <FormGroup>
-          <Form.Check
-            type="checkbox"
-            checked={showInstallationSites}
-            onChange={() => setShowInstallationSites(!showInstallationSites)}
-            label="Installation"
-          />
-        </FormGroup>
-        <FormGroup>
-          <FormSelect
-            className="mx-4 text-secondary"
-            onChange={(e) => setSortBy(e.target.value)}
-          >
-            <option value="name">Sort by name</option>
-            <option value="country">Sort by country</option>
-          </FormSelect>
-        </FormGroup>
-      </Form>
-      <Row className="ms-5 p-3">
-        {sitesToDisplay.map((site) => (
-          <Site key={site.id} site={site} />
-        ))}
-      </Row>
+      <Container>
+        <Row>
+          <Col>
+            <header className="p-5 bg-light">
+              <h1 className="fs-1 fw-bold">Offshore Wind Farms</h1>
+              <p className="fs-4">
+                Explore the world's blue energy power plants
+              </p>
+              <a
+                className="btn btn-primary btn-lg"
+                href="/upload"
+                role="button"
+              >
+                Upload Offshore Wind Farm
+              </a>
+            </header>
+          </Col>
+        </Row>
+          <Form className="d-flex flex-wrap align-items-center p-4 mx-5">
+            <FormGroup>
+              <Form.Control
+                type="search"
+                placeholder="Search by name"
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Form.Check
+                type="checkbox"
+                checked={showCommissionSites}
+                onChange={() => setShowCommissionSites(!showCommissionSites)}
+                label="Commission"
+                className="mx-4"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Form.Check
+                type="checkbox"
+                checked={showInstallationSites}
+                onChange={() =>
+                  setShowInstallationSites(!showInstallationSites)
+                }
+                label="Installation"
+              />
+            </FormGroup>
+            <FormGroup>
+              <FormSelect
+                className="mx-4 text-secondary"
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option value="name">Sort by name</option>
+                <option value="country">Sort by country</option>
+              </FormSelect>
+            </FormGroup>
+          </Form>
+        <Row className="ms-5 p-3">
+          {sitesToDisplay.map((site) => (
+            <Site key={site.id} site={site} />
+          ))}
+        </Row>
+      </Container>
     </>
   );
 }
