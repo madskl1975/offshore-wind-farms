@@ -47,207 +47,158 @@ export default function SitePage() {
         </Card.Title>
         <Tabs defaultActiveKey="Information" className="mb-3" justify>
           <Tab eventKey="Information" title="Information">
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">Country</Col>
-                <Col className="py-1 border border-white">{site.country}</Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">
-                  Development Status
-                </Col>
-                <Col className="py-1 border border-white">
-                  {site.developmentStatus}
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">Sea Name</Col>
-                <Col className="py-1 border border-white">{site.seaName}</Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">Area</Col>
-                <Col className="py-1 border border-white">
-                  {site.areaOfWindfarm} km&sup2;
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">
-                  Distance from Shore
-                </Col>
-                <Col className="py-1 border border-white">
-                  {site.distanceFromShoreMin}-{site.distanceFromShoreMax} m
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">Water Depth</Col>
-                <Col className="py-1 border border-white">
-                  {site.waterDepthMin}-{site.waterDepthMax} m
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">
-                  Installed Capacity
-                </Col>
-                <Col className="py-1 border border-white">
-                  {site.installedCapacity} MW
-                </Col>
-              </Row>
-            </Card.Text>
+            <Row className="bg-primary text-dark bg-opacity-10">
+              <Col className="py-1 border border-white">Country</Col>
+              <Col className="py-1 border border-white">{site.country}</Col>
+            </Row>
+            <Row className="bg-primary text-dark bg-opacity-10">
+              <Col className="py-1 border border-white">Development Status</Col>
+              <Col className="py-1 border border-white">
+                {site.developmentStatus}
+              </Col>
+            </Row>
+            <Row className="bg-primary text-dark bg-opacity-10">
+              <Col className="py-1 border border-white">Sea Name</Col>
+              <Col className="py-1 border border-white">{site.seaName}</Col>
+            </Row>
+            <Row className="bg-primary text-dark bg-opacity-10">
+              <Col className="py-1 border border-white">Area</Col>
+              <Col className="py-1 border border-white">
+                {site.areaOfWindfarm} km&sup2;
+              </Col>
+            </Row>
+            <Row className="bg-primary text-dark bg-opacity-10">
+              <Col className="py-1 border border-white">
+                Distance from Shore
+              </Col>
+              <Col className="py-1 border border-white">
+                {site.distanceFromShoreMin}-{site.distanceFromShoreMax} m
+              </Col>
+            </Row>
+            <Row className="bg-primary text-dark bg-opacity-10">
+              <Col className="py-1 border border-white">Water Depth</Col>
+              <Col className="py-1 border border-white">
+                {site.waterDepthMin}-{site.waterDepthMax} m
+              </Col>
+            </Row>
+            <Row className="bg-primary text-dark bg-opacity-10">
+              <Col className="py-1 border border-white">Installed Capacity</Col>
+              <Col className="py-1 border border-white">
+                {site.installedCapacity} MW
+              </Col>
+            </Row>
           </Tab>
           <Tab eventKey="Timeline" title="Timeline">
-            {site.projectStart?.map((projectStart) => (
-              <>
-                <Card.Text className="mb-0">
-                  <Row className="bg-primary text-dark bg-opacity-10">
-                    <Col className="py-1 border border-white">
-                      Project Start
-                    </Col>
-                    <Col className="py-1 border border-white">
-                      {projectStart.projectStartYear}
-                      {projectStart.projectStartMonth && ", "}
-                      {projectStart.projectStartMonth}
-                      {projectStart.projectStartEvent && " - "}
-                      {projectStart.projectStartEvent}
-                    </Col>
-                  </Row>
-                </Card.Text>
-              </>
+            {site.projectStart?.map((projectStart, index) => (
+              <div key={index}>
+                <Row className="bg-primary text-dark bg-opacity-10">
+                  <Col className="py-1 border border-white">Project Start</Col>
+                  <Col className="py-1 border border-white">
+                    {projectStart.projectStartYear}
+                    {projectStart.projectStartMonth && ", "}
+                    {projectStart.projectStartMonth}
+                    {projectStart.projectStartEvent && " - "}
+                    {projectStart.projectStartEvent}
+                  </Col>
+                </Row>
+              </div>
             ))}
-            <Card.Text className="mb-0">
-                <Row className="bg-primary text-dark bg-opacity-10">
-                  <Col className="py-1 border border-white">
-                    Installation Start
-                  </Col>
-                  <Col className="py-1 border border-white">
-                    {site.installationStartYear}
-                    {site.installationStartMonth && ", "}
-                    {site.installationStartMonth}
-                    {site.installationStartEvent && " - "}
-                    {site.installationStartEvent}
-                  </Col>
-                </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">
-                  First Power Generation
-                </Col>
-                <Col className="py-1 border border-white">
-                  {site.firstPowerGenerationYear}
-                  {site.firstPowerGenerationMonth && ", "}
-                  {site.firstPowerGenerationMonth}
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-              <Row className="bg-primary text-dark bg-opacity-10">
-                <Col className="py-1 border border-white">Commission</Col>
-                <Col className="py-1 border border-white">
-                  {site.commisionYear}
-                  {site.commisionMonth && ", "}
-                  {site.commisionMonth}
-                </Col>
-              </Row>
-            </Card.Text>
-            <Card.Text className="mb-0">
-                <Row className="bg-primary text-dark bg-opacity-10">
-                  <Col className="py-1 border border-white">Decommission</Col>
-                  <Col className="py-1 border border-white">
-                    {site.decommisionYear}
-                    {site.decommisionMonth && ", "}
-                    {site.decommisionMonth}
-                  </Col>
-                </Row>
-            </Card.Text>
+            <Row className="bg-primary text-dark bg-opacity-10">
+              <Col className="py-1 border border-white">Installation Start</Col>
+              <Col className="py-1 border border-white">
+                {site.installationStartYear}
+                {site.installationStartMonth && ", "}
+                {site.installationStartMonth}
+                {site.installationStartEvent && " - "}
+                {site.installationStartEvent}
+              </Col>
+            </Row>
+            <Row className="bg-primary text-dark bg-opacity-10">
+              <Col className="py-1 border border-white">
+                First Power Generation
+              </Col>
+              <Col className="py-1 border border-white">
+                {site.firstPowerGenerationYear}
+                {site.firstPowerGenerationMonth && ", "}
+                {site.firstPowerGenerationMonth}
+              </Col>
+            </Row>
+            <Row className="bg-primary text-dark bg-opacity-10">
+              <Col className="py-1 border border-white">Commission</Col>
+              <Col className="py-1 border border-white">
+                {site.commisionYear}
+                {site.commisionMonth && ", "}
+                {site.commisionMonth}
+              </Col>
+            </Row>
+            <Row className="bg-primary text-dark bg-opacity-10">
+              <Col className="py-1 border border-white">Decommission</Col>
+              <Col className="py-1 border border-white">
+                {site.decommisionYear}
+                {site.decommisionMonth && ", "}
+                {site.decommisionMonth}
+              </Col>
+            </Row>
           </Tab>
           <Tab
             eventKey="Technical Specifications"
             title="Technical Specifications"
           >
-            {site.turbine?.map((turbine) => (
-              <>
-                <Card.Text className="mb-0">
-                  <Row className="bg-primary text-dark bg-opacity-10">
-                    <Col className="py-1 border border-white">
-                      Turbine Manufacturer
-                    </Col>
-                    <Col className="py-1 border border-white">
-                      {turbine.manufacturer}
-                    </Col>
-                  </Row>
-                </Card.Text>
-
-                <Card.Text className="mb-0">
-                  <Row className="bg-primary text-dark bg-opacity-10">
-                    <Col className="py-1 border border-white">
-                      Turbine Model
-                    </Col>
-                    <Col className="py-1 border border-white">
-                      {turbine.model}
-                    </Col>
-                  </Row>
-                </Card.Text>
-                <Card.Text className="mb-0">
-                  <Row className="bg-primary text-dark bg-opacity-10">
-                    <Col className="py-1 border border-white">
-                      Number of Turbines
-                    </Col>
-                    <Col className="py-1 border border-white">
-                      {turbine.numberOfTurbines}
-                    </Col>
-                  </Row>
-                </Card.Text>
-                <Card.Text className="mb-0">
-                  <Row className="bg-primary text-dark bg-opacity-10">
-                    <Col className="py-1 border border-white">
-                      Rated Power per Turbine
-                    </Col>
-                    <Col className="py-1 border border-white">
-                      {turbine.ratedPowerPerTurbine} MW
-                    </Col>
-                  </Row>
-                </Card.Text>
-                <Card.Text className="mb-0">
-                  <Row className="bg-primary text-dark bg-opacity-10">
-                    <Col className="py-1 border border-white">Foundations</Col>
-                    <Col className="py-1 border border-white">
-                      {turbine.foundationNumber} {turbine.foundationType}
-                    </Col>
-                  </Row>
-                </Card.Text>
-                <Card.Text className="mb-0">
-                  <Row className="bg-primary text-dark bg-opacity-10">
-                    <Col className="py-1 border border-white">
-                      Foundation Material
-                    </Col>
-                    <Col className="py-1 border border-white">
-                      {turbine.foundationMaterial}
-                    </Col>
-                  </Row>
-                </Card.Text>
-                <Card.Text className="mb-0">
-                  <Row className="bg-primary text-dark bg-opacity-10">
-                    <Col className="py-1 border border-white">
-                      Foundation Principle
-                    </Col>
-                    <Col className="py-1 border border-white">
-                      {turbine.foundationPrinciple}
-                    </Col>
-                  </Row>
-                </Card.Text>
-              </>
+            {site.turbine?.map((turbine, index) => (
+              <div key={index}>
+                <Row className="bg-primary text-dark bg-opacity-10">
+                  <Col className="py-1 border border-white">
+                    Turbine Manufacturer
+                  </Col>
+                  <Col className="py-1 border border-white">
+                    {turbine.manufacturer}
+                  </Col>
+                </Row>
+                <Row className="bg-primary text-dark bg-opacity-10">
+                  <Col className="py-1 border border-white">Turbine Model</Col>
+                  <Col className="py-1 border border-white">
+                    {turbine.model}
+                  </Col>
+                </Row>
+                <Row className="bg-primary text-dark bg-opacity-10">
+                  <Col className="py-1 border border-white">
+                    Number of Turbines
+                  </Col>
+                  <Col className="py-1 border border-white">
+                    {turbine.numberOfTurbines}
+                  </Col>
+                </Row>
+                <Row className="bg-primary text-dark bg-opacity-10">
+                  <Col className="py-1 border border-white">
+                    Rated Power per Turbine
+                  </Col>
+                  <Col className="py-1 border border-white">
+                    {turbine.ratedPowerPerTurbine} MW
+                  </Col>
+                </Row>
+                <Row className="bg-primary text-dark bg-opacity-10">
+                  <Col className="py-1 border border-white">Foundations</Col>
+                  <Col className="py-1 border border-white">
+                    {turbine.foundationNumber} {turbine.foundationType}
+                  </Col>
+                </Row>
+                <Row className="bg-primary text-dark bg-opacity-10">
+                  <Col className="py-1 border border-white">
+                    Foundation Material
+                  </Col>
+                  <Col className="py-1 border border-white">
+                    {turbine.foundationMaterial}
+                  </Col>
+                </Row>
+                <Row className="bg-primary text-dark bg-opacity-10">
+                  <Col className="py-1 border border-white">
+                    Foundation Principle
+                  </Col>
+                  <Col className="py-1 border border-white">
+                    {turbine.foundationPrinciple}
+                  </Col>
+                </Row>
+              </div>
             ))}
           </Tab>
         </Tabs>

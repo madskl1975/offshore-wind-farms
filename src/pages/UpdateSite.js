@@ -56,7 +56,7 @@ export default function UpdateSite() {
 
   async function updateSite(event) {
     event.preventDefault();
-    const siteToUpdate = updateData; // hvordan jeg putter key/value from state ind her?
+    const siteToUpdate = updateData; 
     const response = await fetch(url, {
       method: "PUT",
       body: JSON.stringify(siteToUpdate),
@@ -108,41 +108,6 @@ export default function UpdateSite() {
     });
   }
 
-  
-
-  // async function updateSite(siteToUpdate) {
-  //   siteToUpdate.uid = updateData.uid;
-  //   const response = await fetch(url, {
-  //     method: "PUT",
-  //     body: JSON.stringify(siteToUpdate),
-  //   });
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     console.log("Site updated: ", data);
-  //     navigate("/");
-  //   } else {
-  //     alert("Sorry, something went wrong");
-  //   }
-  // }
-
-  //   async function updateSite(event) {
-  //     event.preventDefault();
-  //     const siteToUpdate = {
-  //       // key/name: value from state
-  //       name: name,
-  //       country: country,
-  //       image: image,
-  //     };
-
-  //     const response = await fetch(url, {
-  //       method: "PUT",
-  //       body: JSON.stringify(siteToUpdate),
-  //     });
-  //     if (response.ok) {
-  //       navigate("/");
-  //     }
-  //   }
-
   function handleImageChange(event) {
     const file = event.target.files[0];
     if (file.size < 512000) {
@@ -189,8 +154,6 @@ export default function UpdateSite() {
                     name="name"
                     value={updateData.name}
                     onChange={handleChange}
-                    // value={name}
-                    // onChange={(e) => setName(e.target.value)}
                   />
                 </Col>
               </Row>

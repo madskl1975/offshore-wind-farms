@@ -145,8 +145,6 @@ export default function UploadSite() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    // value={name}
-                    // onChange={(e) => setName(e.target.value)}
                   />
                 </Col>
               </Row>
@@ -206,7 +204,6 @@ export default function UploadSite() {
                         id={`stackedDevelopementStatus-${radioButtons}`}
                         name="developmentStatus"
                         value="Installation"
-                        // checked={formData.developmentStatus === "Installation"}
                         onChange={handleChange}
                       />
                       <Form.Text muted>Site is under construction</Form.Text>
