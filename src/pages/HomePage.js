@@ -112,7 +112,7 @@ export default function HomePage() {
     <>
       <Row>
         <Col>
-          <header className="p-5 bg-light">
+          <header className="p-5 bg-light text-center">
             <h1 className="fs-1 fw-bold">Offshore Wind Farms</h1>
             <p className="fs-4">Explore the world's blue energy power plants</p>
             <a className="btn btn-primary btn-lg" href="/upload" role="button">
