@@ -107,7 +107,7 @@ export default function HomePage() {
   // comes before, or after, or is the same as the given string in sort order
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
 
-  // return the output of the React function component, eg. HomePage
+  // return the output of the React function component, eg. in thsi case HomePage
   return (
     <>
       <Row>

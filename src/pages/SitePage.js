@@ -19,7 +19,7 @@ export default function SitePage() {
       setSite(data); // set the state with fetched data
     }
     getSite();
-  }, [url]); // <--- "[]" VERY IMPORTANT!!!
+  }, [url]); 
 
   function showDeleteDialog() {
     const shouldDelete = window.confirm(
