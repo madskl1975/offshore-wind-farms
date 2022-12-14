@@ -5,16 +5,19 @@ import { Row, Col, Form, FormGroup, FormSelect, Container } from "react-bootstra
 
 export default function HomePage() {
   const [sites, setSites] = useState([]);
-  // export default mangler
-  // HomePage = React function component
-  // sites = name of state to handle data
-  // setSites: name of the function to set the state
-  // setSites doesn't change state, interactions, eg. onClick etc renders change
-  // useState ([]) = initial state = empty array []
   const [searchValue, setSearchValue] = useState(""); // ("") = string value
   const [showCommissionSites, setShowCommissionSites] = useState(true); // (true) og (false) = boolean value
   const [showInstallationSites, setShowInstallationSites] = useState(true);
   const [sortBy, setSortBy] = useState("installedCapacity"); // "installedCapacity" = default sort
+
+  // export default function HomePage = React function component,
+  // export default makes it posible to run the <HomePage /> component like this in other .js files
+  // Hook: useState returns a stateful value, and a function to update it
+  // sites = name of state to handle data
+  // setSites: name of the function to set the state
+  // setSites doesn't change state, interactions, eg. onClick etc renders change
+  // useState ([]) = initial state = empty array []
+  // https://reactjs.org/docs/hooks-reference.html#usestate
 
   useEffect(() => {
     async function getData() {
@@ -26,23 +29,28 @@ export default function HomePage() {
       setSites(sites);
     }
     getData();
-  }, []); // <--- "[]" er vigtig, fordi data sættes ind i et array og ikke kalder REST API'et hele tiden
+  }, []);
 
-  // useEffect mangler
-  // async function, await fetch, await response.json mangler
-  // Object.keys mangler
-  // .map mangler
+  // The Effect Hook lets you perform side effects in function components, for instance in this case using fetch
+  // https://reactjs.org/docs/hooks-reference.html#useeffect
+  // The async function declaration declares an async function where the await keyword is permitted within the function body.
+  // The async and await keywords enable asynchronous, promise-based behavior to be written in a cleaner style, avoiding the
+  // need to explicitly configure promise chains.
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
 
-  // useEffect er side effect, der fetcher data.
-  // Funktionen er sat til async, fordi kaldet fra clientside til REST API'et (serverside)
-  // kan have forsinkelse inden data returners til clienten.
-  // JS er default synkron, så derfor async funktion og await fetch og await response
-  // Data modstages i JSON og Object.keys(data).map mapper JSON data og laver objekterne om til et array
+  // Await fetch is asynchronous and used to sending af request for data (Firebase REST API here) and asynchronously receives response in JSON.
+  // The default method is GET, but can also be used to upload (POST), update (PUT), and delete (delete)
+  // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Basic_concepts
 
-  let sitesToDisplay = [...sites]; // sitesToDisplay er en kopi af sites array
+  // The Object.keys() method returns an array of a given object's own enumerable string-keyed property names.
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+  //
+  // The map() method creates a new array populated with the results of calling a provided function on every element in the calling array.
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+
+  let sitesToDisplay = [...sites];
 
   if (!showCommissionSites) {
-    //
     sitesToDisplay = sitesToDisplay.filter(
       (site) => site.developmentStatus === "Installation"
     );
@@ -66,13 +74,20 @@ export default function HomePage() {
     sitesToDisplay.sort((site1, site2) => site2[sortBy] - site1[sortBy]);
   }
 
-  // let siteToDisplay mangler
-  // [...sites] spread syntax mangler
-  // if = conditional statement mangler
+  // [...array] The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays,
+  // or properties from objects, into distinct variables.
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#array_destructuring
+  //
+  // if...else: The if...else statement executes a statement if a specified condition is truthy. If the condition is falsy,
+  // another statement in the optional else clause will be executed.
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else
+  //
+  // (!) The logical NOT (!) (logical complement, negation) operator takes truth to falsity and vice versa.
+  // It is typically used with boolean (logical) values.
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT
   //
   // Array method: The filter() method creates a shallow copy of a portion of a given array, filtered down to just the elements
   // from the given array that pass the test implemented by the provided function.
-  //
   // A shallow copy of an object is a copy whose properties share the same references (point to the same underlying values)
   // as those of the source object from which the copy was made
   // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
@@ -84,9 +99,10 @@ export default function HomePage() {
   // String method: The toLowerCase() method returns the calling string value converted to lower case.
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase
   //
-  // Array method: The sort() method sorts the elements of an array in place and returns the reference to the same array, now sorted. 
+  // Array method: The sort() method sorts the elements of an array in place and returns the reference to the same array, now sorted.
   // The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.
-  // 
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+  //
   // String method: The localeCompare() method returns a number indicating whether a reference string
   // comes before, or after, or is the same as the given string in sort order
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
@@ -113,6 +129,9 @@ export default function HomePage() {
               placeholder="Search by name"
               onChange={(e) => setSearchValue(e.target.value)}
             />
+            {/* onChange = (event) arrow function setState (event.target.value)
+            https://reactjs.org/docs/handling-events.html
+            https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events */}
           </FormGroup>
           <FormGroup>
             <Form.Check

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card, Row, Col, Tabs, Tab, Button } from "react-bootstrap";
+// The useParams hook returns an object of key/value pairs of the dynamic params from the current URL 
+// that were matched by the <Route path>. Child routes inherit all params from their parent routes.
+// https://reactrouter.com/en/main/hooks/use-params
 
 export default function SitePage() {
   const [site, setSite] = useState([]); // state to handle the data (site)

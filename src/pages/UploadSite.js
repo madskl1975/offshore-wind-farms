@@ -57,6 +57,9 @@ export default function UploadSite() {
     });
   }
 
+  // setFormData is using previous state to set state
+  // https://reactjs.org/docs/state-and-lifecycle.html
+
   function handleProjectStart(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -98,6 +101,10 @@ export default function UploadSite() {
       navigate("/");
     }
   }
+
+  // The JSON.stringify() method converts a JavaScript value to a JSON string, optionally replacing values 
+  // if a replacer function is specified or optionally including only the specified properties if a replacer array is specified.
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
 
   function handleImageChange(event) {
     const file = event.target.files[0];
