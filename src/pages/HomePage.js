@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import Site from "../components/HomePageCards";
 
-import { Row, Col, Form, FormGroup, FormSelect, Container } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Form,
+  FormGroup,
+  FormSelect,
+  Container,
+} from "react-bootstrap";
 
 export default function HomePage() {
   const [sites, setSites] = useState([]);
